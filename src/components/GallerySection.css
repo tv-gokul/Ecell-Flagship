@@ -1,0 +1,4 @@
+.gallery-section,
+.gallery-section * {
+  background: transparent !important;
+}

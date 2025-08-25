@@ -1,3 +1,137 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto+Mono&display=swap');
+
+:root {
+  --bg-1: #021229;
+  --bg-2: #07133a;
+  --bg-3: #000000;
+}
+
+/* single source of truth for the app background */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 50%, var(--bg-3) 100%);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* while loading you can optionally show a solid background:
+   App.jsx toggles body.is-loading — adjust as needed */
+body.is-loading {
+  background: #000; /* or same gradient if you want consistency */
+}
+
+/* make all main layout areas transparent so the root gradient shows through */
+main, .app-container, .hero-section, .gallery-section, .final-section, .preloader-container, .loading-screen {
+  background: transparent !important;
+}
+
+/* keep nav semi-opaque (optional) so the gradient peeks through */
+.site-nav {
+  background: linear-gradient(180deg, rgba(2,18,41,0.35), rgba(7,19,58,0.18));
+}
+
+/* helper: if any component still imposes a solid background you can override it */
+.component-bg-reset {
+  background: transparent !important;
+}
+
+/* Section edge blend utility: add .section-blend to sections that should softly fade into neighbors */
+.section-blend {
+  position: relative;
+  z-index: 0;
+  background: transparent !important; /* ensure section itself is transparent */
+}
+
+/* bottom fade (softly reveals next section / root gradient) */
+.section-blend::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: clamp(80px, 12vh, 160px);
+  pointer-events: none;
+  /* fade from transparent to a subtle dark overlay that blends with root gradient */
+  background: linear-gradient(to bottom,
+    rgba(2,18,41,0) 0%,
+    rgba(2,18,41,0.06) 30%,
+    rgba(2,18,41,0.12) 60%,
+    rgba(0,0,0,0.25) 100%);
+  mix-blend-mode: normal;
+}
+
+/* top fade (softly hide abrupt top edge when entering section) */
+.section-blend::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: clamp(60px, 10vh, 120px);
+  pointer-events: none;
+  background: linear-gradient(to bottom,
+    rgba(0,0,0,0.25) 0%,
+    rgba(2,18,41,0.12) 35%,
+    rgba(2,18,41,0.06) 70%,
+    rgba(2,18,41,0) 100%);
+  mix-blend-mode: normal;
+}
+
+/* Vanta mount inserted at body level uses id #vanta-bg */
+#vanta-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 1;
+  will-change: transform, opacity;
+  -webkit-transform: translateZ(0);
+}
+
+/* make sure canvas is crisp and not filtered */
+#vanta-bg canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  transform: translateZ(0) !important;
+  image-rendering: auto !important;
+  filter: none !important;
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+}
+
+/* lower opacity and disable some visual intensity on very small screens */
+@media (max-width: 640px) {
+  #vanta-bg { opacity: 0.95; } /* keep less translucent if desired */
+  /* optionally hide entirely on very small / low-power devices */
+  @media (max-width: 360px) {
+    /* #vanta-bg { display: none !important; } */
+  }
+}
+
+/* ensure main content sits above the animation */
+main, .app-container, .site-nav, .hero-section, .gallery-section, .final-section {
+  position: relative;
+  z-index: 1;
+  background: transparent !important;
+}
+
+/* Preloader must sit above everything while active */
+.preloader-container,
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(2,18,41,1), rgba(7,19,58,0.95));
+}
+
+/* keep sections transparent */
+.section-blend, .section-blend * {
+  background: transparent !important;
+}

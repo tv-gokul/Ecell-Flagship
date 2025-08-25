@@ -1,0 +1,101 @@
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: clamp(1.5rem, 4vw, 4rem) clamp(1.2rem, 4vw, 3.5rem);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.hero-logo-dock {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-width: 160px;
+  min-height: 120px;
+  padding-top: 10px;
+  margin-right: clamp(2rem, 6vw, 5rem);
+}
+
+.hero-content {
+  max-width: 680px;
+  z-index: 1;
+  position: relative;
+}
+
+.hero-title {
+  margin: 0 0 1rem;
+  font-size: clamp(2.5rem, 7vw, 4.2rem);
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #f5f9ff;
+  overflow: visible;
+  display: inline-block;
+}
+
+.hero-title .char {
+  display: inline-block;
+  transform: translateY(0);
+  will-change: transform, opacity;
+}
+
+/* wrap and hide overflow per char for smooth slide */
+.hero-title { white-space: nowrap; }
+.hero-title .char { backface-visibility: hidden; }
+
+.hero-tagline {
+  margin: 0;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 1.4;
+  color: #c7d4e6;
+}
+
+/* Final state styling for logo after FLIP */
+.logo-final .loading-logo,
+.hero-logo-dock .loading-logo {
+  width: 160px;
+  filter: drop-shadow(0 14px 34px rgba(0,0,0,0.55));
+  transition: width 0.4s ease;
+}
+
+/* Vanta mount fills the section and sits under content */
+.hero-vanta-mount {
+  position: absolute;
+  inset: 0;           /* top:0; right:0; bottom:0; left:0 */
+  z-index: 0;
+}
+
+@media (max-width: 640px) {
+  /* center the flagship title on small screens */
+  .hero-title {
+    text-align: center;
+    margin-left: 0;
+    margin-right: 0;
+    font-size: clamp(1.8rem, 8vw, 2.6rem); /* optional: tune size for mobile */
+    line-height: 1.05;
+  }
+
+  /* ensure hero content centers under the logo dock */
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* remove the right margin reserved for desktop logo dock so content centers */
+  .hero-logo-dock {
+    margin-right: 0;
+    min-width: 0;
+    min-height: 0;
+    padding-top: 0.5rem;
+  }
+
+  /* mobile: allow wrapping and center */
+  .hero-title { white-space: normal; text-align: center; display: block; width: 100%; }
+  .hero-content { align-items: center; text-align: center; display: flex; flex-direction: column; }
+}

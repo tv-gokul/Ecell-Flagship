@@ -1,0 +1,278 @@
+/* full-page bluish-black gradient (applies to body as well) */
+:root {
+  --bg-1: #021229;
+  --bg-2: #07133a;
+  --bg-3: #000000;
+  --gold-1: rgba(212,175,55,0.28);
+  --gold-2: rgba(255,210,122,0.16);
+  --blue-start: #60a5fa;
+  --blue-mid: #3b82f6;
+  --blue-end: #06b6d4;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 50%, var(--bg-3) 100%);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure preloader is a full-screen opaque overlay above everything */
+.preloader-container,
+.loading-screen {
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;               /* above navbar and hero */
+  pointer-events: auto;         /* block clicks to underlying content */
+  background: linear-gradient(180deg, #021229 0%, #07133a 50%, #000000 100%); /* loader background */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Ensure app content is transparent so the body gradient shows through */
+main, .app-container {
+  background: transparent !important;
+}
+
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  z-index: 9999;
+  background: linear-gradient(180deg, #021229 0%, #07133a 50%, #000000 100%);
+  pointer-events: none;
+}
+
+/* keep loader card content centered and distinct */
+.preloader-content,
+.loading-screen .preloader-content {
+  background: rgba(255,255,255,0.03); /* subtle frosted card, optional */
+  padding: 22px;
+  border-radius: 12px;
+  box-shadow: 0 14px 50px rgba(2,18,41,0.7);
+}
+
+/* tiny golden sparkle layer behind the progress bar */
+.progress-bar-container::after {
+  content: "";
+  position: absolute;
+  inset: -8px -6%; /* slightly larger than the bar so glow peeks out */
+  border-radius: 999px;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 10% 50%, rgba(212,175,55,0.28) 0 3px, transparent 4px),
+    radial-gradient(circle at 35% 30%, rgba(255,210,122,0.20) 0 2.5px, transparent 3.5px),
+    radial-gradient(circle at 65% 70%, rgba(212,175,55,0.20) 0 3px, transparent 4px),
+    radial-gradient(circle at 85% 40%, rgba(255,220,145,0.16) 0 2px, transparent 3px);
+  filter: blur(4px);
+  opacity: 0.28;
+  transform: translateY(0) scale(1);
+  z-index: 1;
+  mix-blend-mode: screen;
+  animation: sparkle 2.6s ease-in-out infinite;
+}
+
+/* blue moving progress fill (shimmer) */
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg,
+    #60a5fa 0%,
+    #3b82f6 30%,
+    #06b6d4 60%,
+    #60a5fa 100%);
+  background-size: 220% 100%;
+  animation: shimmer-blue 1.8s linear infinite;
+  border-radius: inherit;
+  transition: width 0.18s linear;
+  box-shadow:
+    0 6px 18px rgba(59,130,246,0.14),
+    inset 0 0 12px rgba(99,102,241,0.08);
+  position: relative;
+  z-index: 2;
+}
+
+/* subtle bright streak on the blue fill for contrast (pseudo-element) */
+.progress-bar-fill::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 30%;
+  background: linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02));
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  transform: translateX(-50%);
+  opacity: 0.8;
+  z-index: 3;
+}
+
+/* --- Percentage Display --- */
+.percentage-container {
+  color: #fff;
+  font-size: 13px;
+  opacity: 0.98;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  z-index: 2;
+}
+
+/* subtle brighter percentage for contrast */
+.percentage-text {
+  color: #fff9ed;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+}
+
+/* Preloader styles */
+.preloader-container {
+  position: fixed;
+  inset: 0; /* top, right, bottom, left */
+  background: linear-gradient(180deg, #021229 0%, #07133a 50%, #000000 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.preloader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: min(540px, 88vw);
+  max-width: 88vw;
+  padding: 26px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  pointer-events: auto;
+  box-shadow: 0 12px 40px rgba(2,18,41,0.6);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+}
+
+/* logo */
+.logo-wrap {
+  display: inline-block;
+  will-change: transform;
+}
+
+.preloader-logo {
+  width: 96px; /* slightly small in center */
+  height: auto;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  filter: none; /* no glow */
+  transition: transform 280ms ease, filter 280ms ease;
+}
+
+/* subtitle */
+.logo-subtitle {
+  margin: 0;
+  font-size: 12px;
+  color: #cfc6b0;
+  letter-spacing: 1px;
+}
+
+/* progress bar outer (with golden sparkle layer behind) */
+.preloader-bar-outer {
+  position: relative;
+  width: 72%;
+  max-width: 420px;
+  height: 8px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(2,18,41,0.5), inset 0 0 10px rgba(0,0,0,0.2);
+}
+
+/* golden sparkle layer (behind the blue fill) */
+.preloader-bar-outer .preloader-bar-sparkles {
+  position: absolute;
+  inset: -6px -4%;
+  border-radius: 999px;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 50%, var(--gold-1) 0 3px, transparent 4px),
+    radial-gradient(circle at 36% 28%, var(--gold-2) 0 2.5px, transparent 3.5px),
+    radial-gradient(circle at 64% 72%, var(--gold-1) 0 3px, transparent 4px),
+    radial-gradient(circle at 86% 40%, var(--gold-2) 0 2px, transparent 3px);
+  filter: blur(4px);
+  opacity: 0.34;
+  z-index: 1;
+  mix-blend-mode: screen;
+  transform: translateY(0) scale(1);
+  transition: opacity 300ms ease;
+}
+
+/* blue moving fill */
+.preloader-bar-fill {
+  position: relative;
+  height: 100%;
+  width: 0%;
+  z-index: 2;
+  background: linear-gradient(90deg, var(--blue-start) 0%, var(--blue-mid) 40%, var(--blue-end) 100%);
+  background-size: 220% 100%;
+  animation: shimmer-blue 1.6s linear infinite;
+  transition: width 160ms linear;
+  box-shadow: 0 8px 18px rgba(59,130,246,0.12), inset 0 0 10px rgba(0,0,0,0.12);
+  border-radius: 999px;
+}
+
+/* percent text */
+.preloader-percent {
+  color: #f8f7f2;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* If you previously set preloader elements to pointer-events:none, revert that */
+.preloader-container * { pointer-events: auto; }
+
+/* Optional: while body has .is-loading hide main to avoid content flashing */
+body.is-loading main {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Animations */
+@keyframes logo-settle {
+  0% { transform: translateY(0); }
+  40% { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes shimmer-blue {
+  0% { background-position: -120% 0; }
+  100% { background-position: 120% 0; }
+}
+
+@keyframes sparkle {
+  0%   { opacity: 0.22; transform: translateY(0) scale(0.98); }
+  40%  { opacity: 0.35; transform: translateY(-2px) scale(1.02); }
+  70%  { opacity: 0.26; transform: translateY(1px) scale(1); }
+  100% { opacity: 0.22; transform: translateY(0) scale(0.98); }
+}
+
+@keyframes gold-pulse {
+  0% { opacity: 0.06; transform: scale(1); }
+  50% { opacity: 0.12; transform: scale(1.03); }
+  100% { opacity: 0.06; transform: scale(1); }
+}
+
+/* responsive */
+@media (max-width: 480px) {
+  .preloader-content { padding: 18px; width: 92vw; }
+  .preloader-logo { width: 80px; }
+  .preloader-bar-outer { width: 86%; height: 7px; }
+}
