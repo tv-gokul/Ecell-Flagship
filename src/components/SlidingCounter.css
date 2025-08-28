@@ -1,0 +1,58 @@
+.sliding-counter {
+  display: flex;
+  font-size: inherit;
+  line-height: 1;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Each digit column is a fixed-height container */
+.digit-column {
+  position: relative;
+  width: 1ch; /* Width of one character */
+  height: 1em; /* Height of one line */
+  overflow: hidden;
+}
+
+/* The strip contains all possible digits stacked vertically */
+.digit-strip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Each individual digit */
+.digit {
+  height: 1em;
+  width: 1ch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Make sure the preloader content has good alignment */
+.preloader-content {
+  display: flex;
+  align-items: center; /* Changed from baseline to center */
+  justify-content: center;
+  font-size: 6rem;
+  font-weight: 600;
+}
+
+.preloader-percent {
+  font-size: 3rem;
+  margin-left: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .preloader-content {
+    font-size: 8rem;
+  }
+  .preloader-percent {
+    font-size: 4rem;
+  }
+}

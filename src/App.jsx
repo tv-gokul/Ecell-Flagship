@@ -1,34 +1,44 @@
 import React, { useState, useEffect } from 'react';
-import Background from './components/Background';
 import Preloader from './components/Preloader';
-import HeroSection from './components/Herosection';
+import FlagshipHero from './components/FlagshipHero';
 import GallerySection from './components/GallerySection';
-import FinalSection from './components/FInalSection';
+import FinalSection from './components/FinalSection';
 import Navbar from './components/Navbar';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
 
-  // add "is-loading" class while loader is active
   useEffect(() => {
-    if (loading) {
-      document.body.classList.add('is-loading');
-    } else {
-      document.body.classList.remove('is-loading');
-    }
-    // cleanup on unmount
+    document.body.classList.toggle('is-loading', loading);
     return () => document.body.classList.remove('is-loading');
   }, [loading]);
 
+  useEffect(() => {
+    const handler = () => { if (window.scrollX !== 0) window.scrollTo(0, window.scrollY); };
+    window.addEventListener('scroll', handler, { passive:true });
+    return () => window.removeEventListener('scroll', handler);
+  }, []);
+
   return (
     <>
-      <Background />          
-      {loading && <Preloader onFinish={() => setLoading(false)} />}
-      <main className="w-full">
-        <Navbar />
-        <HeroSection />
-        <GallerySection />
-        <FinalSection />
+      <Preloader onFinish={() => setLoading(false)} />
+      <main className="app-root">
+        <div className="wrapper-row">
+          <Navbar />
+        </div>
+        {!loading && <FlagshipHero key="flagship-hero" active={!loading} />}
+        <div className="app-sections">
+          <section>
+            <div className="section-inner">
+              <GallerySection />
+            </div>
+          </section>
+          <section>
+            <div className="section-inner">
+              <FinalSection />
+            </div>
+          </section>
+        </div>
       </main>
     </>
   );

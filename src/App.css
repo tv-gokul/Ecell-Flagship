@@ -40,3 +40,117 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Section spacing + mobile alignment */
+.app-root, main {
+  width:100%;
+}
+
+/* Ensure content starts below fixed nav */
+body, .app-root, main {
+  padding-top: var(--nav-height, 62px);
+}
+
+.app-sections > * {
+  position:relative;
+  background:transparent;
+  padding:3.5rem 0 3.5rem;
+}
+
+.app-sections > * .section-inner {
+  width:100%;
+  max-width: var(--content-max);
+  margin:0 auto;
+  padding:0 var(--side-pad-mobile);
+}
+
+@media (min-width:640px){
+  .app-sections > * .section-inner {
+    padding:0 var(--side-pad-tablet);
+  }
+  .app-sections > * {
+    padding:4.5rem 0 4.5rem;
+  }
+}
+
+.app-sections > * + * {
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+
+/* Optional subtle top fade divider on mobile */
+.app-sections > * + *::before {
+  content:"";
+  position:absolute;
+  top:-1px;
+  left:0;
+  right:0;
+  height:42px;
+  pointer-events:none;
+  background:linear-gradient(to bottom, rgba(255,255,255,0.08), rgba(255,255,255,0));
+  opacity:0.15;
+}
+
+@media (min-width:900px){
+  .app-sections > * + *::before { height:60px; }
+}
+
+.app-root {
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+.app-sections > section {
+  position:relative;
+  padding: clamp(2.8rem, 7vh, 5rem) 0;
+}
+
+.app-sections > section .section-inner {
+  width:100%;
+  max-width: var(--content-max);
+  margin:0 auto;
+  padding:0 var(--gutter-xs);
+}
+
+@media (min-width:640px){
+  .app-sections > section .section-inner {
+    padding:0 var(--gutter-sm);
+  }
+}
+
+@media (min-width:1024px){
+  .app-sections > section .section-inner {
+    padding:0 var(--gutter-md);
+  }
+}
+
+.app-sections > section + section {
+  border-top:1px solid rgba(255,255,255,0.07);
+}
+
+@media (max-width:480px){
+  body, .app-root, main { padding-top: var(--nav-height, 56px); }
+  .app-root {
+    padding-top:0; /* navbar already provides space */
+  }
+  .app-sections > * {
+    padding:2.75rem 0 2.75rem;
+  }
+  .app-sections > * .section-inner {
+    padding-left:1rem;
+    padding-right:1rem;
+  }
+  /* If you have any 2+ column layouts turn them into single column */
+  .two-col,
+  .grid-cols-2,
+  .responsive-grid {
+    display:block !important;
+  }
+  /* Generic utility for cards */
+  .card {
+    margin-left:auto;
+    margin-right:auto;
+    max-width:400px;
+  }
+}

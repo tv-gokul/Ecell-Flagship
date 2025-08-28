@@ -2,3 +2,16 @@
 .gallery-section * {
   background: transparent !important;
 }
+
+@media (max-width:480px){
+  .gallery-grid {
+    display:grid;
+    grid-template-columns:1fr !important;
+    gap:1.1rem;
+  }
+  .gallery-item {
+    aspect-ratio: 4 / 3;
+    border-radius:10px;
+    overflow:hidden;
+  }
+}
