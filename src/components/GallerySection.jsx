@@ -1,132 +1,133 @@
-import React, { useRef, useLayoutEffect, useState, useEffect, Suspense } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { useTexture } from '@react-three/drei';
-import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
+"use client";
+import React, { useLayoutEffect, useRef, useMemo } from 'react';
+import { gsap } from 'gsap';
 import './GallerySection.css';
-import logoFallback from '../assets/logo.png'; // optional fallback if images missing
 
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
-
-// Simple ErrorBoundary so canvas errors don't kill the app
-class ErrorBoundary extends React.Component {
-  constructor(props) { super(props); this.state = { hasError: false }; }
-  static getDerivedStateFromError() { return { hasError: true }; }
-  componentDidCatch(err) { console.error('Gallery ErrorBoundary:', err); }
-  render() {
-    if (this.state.hasError) return <div style={{padding:40,color:'#fff'}}>Gallery failed to load.</div>;
-    return this.props.children;
-  }
-}
-
-// Image plane for the cylinder
-function ImagePlane({ texture, index, total, radius = 5 }) {
-  const angle = (index / total) * Math.PI * 2;
-  const x = Math.sin(angle) * radius;
-  const z = Math.cos(angle) * radius;
-  return (
-    <mesh position={[x, 0, z]} rotation={[0, Math.PI / 2 - angle, 0]}>
-      <planeGeometry args={[3, 2]} />
-      <meshBasicMaterial map={texture} toneMapped={false} side={2} />
-    </mesh>
-  );
-}
-
-function CylinderGallery({ urls, rotationYRef }) {
-  const groupRef = useRef();
-  const textures = useTexture(urls);
-  const radius = 5;
-
-  useFrame(() => {
-    if (groupRef.current) groupRef.current.rotation.y = rotationYRef.current;
-  });
-
-  return (
-    <group ref={groupRef} position={[0, -1, 0]}>
-      {textures.map((tx, i) => (
-        <ImagePlane key={i} texture={tx} index={i} total={textures.length} radius={radius} />
-      ))}
-    </group>
-  );
-}
+// Automatically import all images from the gallery folder
+const imageModules = import.meta.glob("../assets/gallery/**/*.{png,jpg,jpeg,webp,avif,gif}", {
+  eager: true,
+  as: "url"
+});
 
 export default function GallerySection() {
-  const sectionRef = useRef(null);
-  const rotationY = useRef(0);
-  const [urls, setUrls] = useState(null);
-
-  // list of intended images (update or move these files to public/images/)
-  const desired = [
-    '/images/event-photo-1.jpg',
-    '/images/event-photo-2.jpg',
-    '/images/event-photo-3.jpg',
-    '/images/event-photo-4.jpg',
-    '/images/event-photo-5.jpg',
-    '/images/event-photo-6.jpg',
-    '/images/event-photo-7.jpg',
-    '/images/event-photo-8.jpg',
-  ];
-
-  // Check each URL and replace failed ones with fallback
-  useEffect(() => {
-    let cancelled = false;
-    async function checkAll() {
-      const results = await Promise.all(
-        desired.map(async (u) => {
-          try {
-            // try fetching the image; if not ok, use fallback
-            const res = await fetch(u, { method: 'GET', cache: 'no-store' });
-            return res.ok ? u : logoFallback;
-          } catch (e) {
-            return logoFallback;
-          }
-        })
-      );
-      if (!cancelled) setUrls(results);
-    }
-    checkAll();
-    return () => { cancelled = true; };
-  }, []);
+  const images = useMemo(() => Object.values(imageModules), []);
+  const componentRoot = useRef(null);
+  const ring = useRef(null);
+  const xPos = useRef(0);
 
   useLayoutEffect(() => {
-    // gentle rotation tied to scroll
-    const onScroll = () => {
-      const rect = sectionRef.current?.getBoundingClientRect();
-      if (!rect) return;
-      const pct = 1 - Math.max(0, Math.min(1, (rect.top + rect.height) / (window.innerHeight + rect.height)));
-      rotationY.current = pct * Math.PI * 2;
-    };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-    };
-  }, []);
+    if (images.length === 0) return;
+
+    const ctx = gsap.context(() => {
+      const imageElements = gsap.utils.toArray('.img');
+
+      // Function to calculate parallax background position
+      const getBgPos = (i) => {
+        return (100 - gsap.utils.wrap(0, 360, gsap.getProperty(ring.current, 'rotationY') - 180 - i * -36) / 360 * 500) + 'px 0px';
+      };
+
+      gsap.timeline()
+        .set(ring.current, { rotationY: 180, cursor: 'grab' })
+        .set(imageElements, {
+          rotateY: (i) => i * -36,
+          transformOrigin: '50% 50% 500px',
+          z: -500,
+          backgroundImage: (i) => `url(${images[i % images.length]})`,
+          backgroundPosition: (i) => getBgPos(i),
+          backfaceVisibility: 'hidden'
+        })
+        .from(imageElements, {
+          duration: 1.5,
+          y: 200,
+          opacity: 0,
+          stagger: 0.1,
+          ease: 'expo'
+        })
+        .add(() => {
+          imageElements.forEach(img => {
+            img.addEventListener('mouseenter', () => {
+              gsap.to(imageElements, { opacity: (i, t) => (t === img) ? 1 : 0.5, ease: 'power3' });
+            });
+            img.addEventListener('mouseleave', () => {
+              gsap.to(imageElements, { opacity: 1, ease: 'power2.inOut' });
+            });
+          });
+        }, '-=0.5');
+
+      // Drag functionality
+      const dragStart = (e) => {
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        xPos.current = Math.round(clientX);
+        gsap.set(ring.current, { cursor: 'grabbing' });
+        window.addEventListener('mousemove', drag);
+        window.addEventListener('touchmove', drag);
+      };
+
+      const drag = (e) => {
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const newX = Math.round(clientX);
+        gsap.to(ring.current, {
+          rotationY: '-=' + ((newX - xPos.current) % 360),
+          onUpdate: () => {
+            gsap.set(imageElements, { backgroundPosition: (i) => getBgPos(i) });
+          }
+        });
+        xPos.current = newX;
+      };
+
+      const dragEnd = () => {
+        window.removeEventListener('mousemove', drag);
+        window.removeEventListener('touchmove', drag);
+        gsap.set(ring.current, { cursor: 'grab' });
+      };
+
+      const stage = componentRoot.current;
+      stage.addEventListener('mousedown', dragStart);
+      stage.addEventListener('touchstart', dragStart, { passive: true });
+      window.addEventListener('mouseup', dragEnd);
+      window.addEventListener('touchend', dragEnd);
+
+      // Cleanup function
+      return () => {
+        stage.removeEventListener('mousedown', dragStart);
+        stage.removeEventListener('touchstart', dragStart);
+        window.removeEventListener('mouseup', dragEnd);
+        window.removeEventListener('touchend', dragEnd);
+        window.removeEventListener('mousemove', drag);
+        window.removeEventListener('touchmove', drag);
+      };
+
+    }, componentRoot); // Scope the context to our component
+
+    return () => ctx.revert(); // Cleanup GSAP animations and listeners
+  }, [images]);
+
+  if (images.length === 0) {
+    return (
+      <div className="gallery-shell-empty">
+        <p>No gallery images found in src/assets/gallery</p>
+      </div>
+    );
+  }
+
+  // We need at least 10 images for the 36-degree steps. We'll loop through the available images.
+  const displayImages = Array.from({ length: 10 });
 
   return (
-    <section ref={sectionRef} className="h-screen w-full relative z-10">
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold text-white">Last Year's Highlights</h2>
-        <p className="text-lg text-blue-200 mt-2">An immersive journey through our milestone event.</p>
+    <section className="gallery-wrapper">
+      <div className="gallery-heading">
+        {/* Add the new subtitle here */}
+        <h2 className="gallery-subtitle">From last year's Flagship</h2>
+        
       </div>
-
-      <div style={{ width: '100%', height: '100vh' }}>
-        <ErrorBoundary>
-          <Suspense fallback={<div style={{color:'#fff',padding:20}}>Loading gallery...</div>}>
-            {urls ? (
-              <Canvas camera={{ position: [0, 0, 12], fov: 60 }}>
-                <ambientLight intensity={0.8} />
-                <pointLight position={[10, 10, 10]} intensity={1.2} />
-                <CylinderGallery urls={urls} rotationYRef={rotationY} />
-              </Canvas>
-            ) : (
-              <div style={{color:'#fff',padding:20}}>Preparing gallery...</div>
-            )}
-          </Suspense>
-        </ErrorBoundary>
+      <div className="stage" ref={componentRoot}>
+        <div className="container">
+          <div className="ring" ref={ring}>
+            {displayImages.map((_, i) => (
+              <div key={i} className="img"></div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

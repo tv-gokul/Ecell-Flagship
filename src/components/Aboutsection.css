@@ -1,0 +1,79 @@
+.about-shell {
+  /* Reduced vertical padding from a max of 6rem to 4rem */
+  padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+  color: #e8ecf1;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+/* On larger screens, show text and logo side-by-side */
+@media (min-width: 768px) {
+  .about-content {
+    grid-template-columns: 2fr 1fr; /* Text takes more space */
+    gap: 4rem;
+  }
+}
+
+.about-text {
+  text-align: left;
+}
+
+.about-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.about-text p {
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  line-height: 1.7;
+  opacity: 0.8;
+  margin-bottom: 2rem;
+}
+
+.register-button {
+  display: inline-block;
+  background-color: #3b82f6; /* Blue accent */
+  color: #fff;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 300ms, transform 200ms;
+}
+
+.register-button:hover {
+  background-color: #2563eb;
+  transform: translateY(-2px);
+}
+
+/* Initial (hidden) state for the logo container */
+.about-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Final (visible) state triggered by the 'is-visible' class */
+.about-logo-container.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-logo {
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+  /* Add the shadow effect */
+  filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.5));
+}

@@ -1,19 +1,23 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Navbar.css";
-import logo from "../assets/logo.png"; // replace with your logo path
+import logo from '../assets/logo.png';
+import logo2 from '../assets/ecell.png';
 
-const LINKS = [
-  { href: "#home", label: "Home" },
-  { href: "#about", label: "About" },
-  { href: "#events", label: "Events" },
-  { href: "#gallery", label: "Gallery" },
-  { href: "#contact", label: "Contact" },
+// Define your navigation links here
+const navLinks = [
+  { href: '#home', label: 'Home' },
+  { href: '#about', label: 'About' },
+  { href: '#gallery', label: 'Gallery' },
+  { href: '#speakers', label: 'Speakers' },
+  // The "Contact" link is removed
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+  const observer = useRef(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -26,34 +30,70 @@ export default function Navbar() {
     document.body.style.overflow = open ? "hidden" : "";
   }, [open]);
 
+  // Create an observer to watch which section is on screen
+  useEffect(() => {
+    observer.current = new IntersectionObserver(
+      (entries) => {
+        const visibleSection = entries.find((entry) => entry.isIntersecting)?.target;
+        if (visibleSection) {
+          setActiveSection(visibleSection.id);
+        }
+      },
+      {
+        rootMargin: "-50% 0px -50% 0px", // Trigger when section is in the middle of the screen
+        threshold: 0,
+      }
+    );
+
+    // Observe each section by its ID
+    const sections = document.querySelectorAll("section[id]");
+    sections.forEach((section) => {
+      observer.current.observe(section);
+    });
+
+    // Cleanup observer on component unmount
+    return () => {
+      sections.forEach((section) => {
+        observer.current.unobserve(section);
+      });
+    };
+  }, []);
+
   return (
     <header className={`nav-shell ${scrolled ? "nav-scrolled" : ""}`}>
       <div className="nav-bar">
+        {/* Group the logos on the left */}
         <div className="nav-left">
-          <a href="#" className="nav-logo" aria-label="Flagship Home">
-            <span className="logo-glow" />
-            FLAGSHIP
+          <a href="#home">
+            <img src={logo2} alt="E-Cell VNIT Logo" className="navbar-logo-img ecell-logo" />
+          </a>
+          <a href="#home">
+            <img src={logo} alt="Flagship Logo" className="navbar-logo-img flagship-logo" />
           </a>
         </div>
-        <nav className="nav-center" aria-label="Main">
-          {LINKS.map((l) => (
-            <a key={l.label} href={l.href} className="nav-link">
-              <span>{l.label}</span>
-              <i />
+      
+        <nav className="nav-center">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className={`nav-link ${activeSection === link.href.substring(1) ? 'is-active' : ''}`}
+            >
+              {link.label}
             </a>
           ))}
-        </nav>
-        <div className="nav-right">
+          {/* The Register button is now part of the central navigation */}
           <button className="cta-btn">Register</button>
+        </nav>
+
+        <div className="nav-right">
+          {/* The standalone Register button is removed, only the hamburger remains */}
           <button
-            className={`nav-hamburger ${open ? "is-active" : ""}`}
-            aria-label="Menu"
-            aria-expanded={open}
-            onClick={() => setOpen((o) => !o)}
+            className="nav-hamburger"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
           >
-            <span />
-            <span />
-            <span />
+            <div className={`hamburger ${open ? 'open' : ''}`}></div>
           </button>
         </div>
       </div>
@@ -74,10 +114,10 @@ export default function Navbar() {
             </button>
           </div>
           <ul className="overlay-links">
-            {LINKS.map((l) => (
-              <li key={l.label}>
-                <a href={l.href} onClick={() => setOpen(false)}>
-                  {l.label}
+            {navLinks.map((link) => (
+              <li key={link.label}>
+                <a href={link.href} onClick={() => setOpen(false)}>
+                  {link.label}
                 </a>
               </li>
             ))}

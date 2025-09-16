@@ -20,25 +20,27 @@ export default function FlagshipHero({ active = false }) {
   const lastDelay = delays[delays.length - 1] || 0;
 
   return (
-    <section className="flagship-hero-shell">
-      <div className="hero-bg-layer" aria-hidden="true">
-        <div className="radial-glow" />
-        <motion.div
-          className="hero-sheen"
-          initial={{ opacity: 0 }}
-          animate={active ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-        />
-        <motion.div
-          className="hero-pass"
-          animate={active ? { x: ["-40%", "140%"] } : { x: "-40%" }}
-          transition={{ duration: 5.2, repeat: active ? Infinity : 0, ease: "linear", delay: 0.6 }}
-        />
+    <div className="flagship-hero-shell">
+      <div className="flagship-bg-layers">
+        <div className="titanium-base"></div>
+        <div className="hero-bg-layer" aria-hidden="true">
+          <div className="radial-glow" />
+          <motion.div
+            className="hero-sheen"
+            initial={{ opacity: 0 }}
+            animate={active ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+          />
+          <motion.div
+            className="hero-pass"
+            animate={active ? { x: ["-40%", "140%"] } : { x: "-40%" }}
+            transition={{ duration: 5.2, repeat: active ? Infinity : 0, ease: "linear", delay: 0.6 }}
+          />
+        </div>
       </div>
-
       <div className="flagship-inner">
-        <h1 className="flagship-title">
-          {title.split("").map((ch, i) => (
+        <h1 className="flagship-title" aria-label={title + year}>
+          {title.split("").map((char, i) => (
             <motion.span
               key={i}
               className="letter-wrap"
@@ -84,7 +86,7 @@ export default function FlagshipHero({ active = false }) {
                     : { scale: 1.12 }
                 }
               >
-                {ch}
+                {char}
               </motion.span>
             </motion.span>
           ))}
@@ -114,38 +116,14 @@ export default function FlagshipHero({ active = false }) {
               </motion.span>
             ))}
           </span>
-
-          <motion.span
-            className="title-sweep"
-            initial={{ x: "-120%" }}
-            animate={
-              active
-                ? {
-                    x: ["-120%", "120%"],
-                    transition: { delay: 0.18 + 0.12, duration: 1.35, ease: [0.4, 0, 0.2, 1] }
-                  }
-                : { x: "-120%" }
-            }
-          />
         </h1>
-
-        <motion.p
-          className="flagship-sub"
-          initial={{ y: 36, opacity: 0, filter: "blur(10px)" }}
-          animate={
-            active
-              ? {
-                  y: 0,
-                  opacity: 0.9,
-                  filter: "blur(0px)",
-                  transition: { delay: 0.18 + lastDelay + 0.95, duration: 0.75, ease: [0.2, 0.8, 0.3, 1] }
-                }
-              : { y: 36, opacity: 0 }
-          }
-        >
-          Beyond the standard.
-        </motion.p>
       </div>
-    </section>
+      {/* Replace the old scroll indicator with the new multi-arrow version */}
+      <a href="#about" className="arrow-container" aria-label="Scroll down">
+        <div className="arrow"></div>
+        <div className="arrow"></div>
+        <div className="arrow"></div>
+      </a>
+    </div>
   );
 }

@@ -1,17 +1,224 @@
-.gallery-section,
-.gallery-section * {
-  background: transparent !important;
+.gallery-wrapper {
+  /* Reduced vertical padding for a tighter layout */
+  padding: clamp(2.5rem, 6vw, 4rem) 0;
+  position: relative;
 }
 
-@media (max-width:480px){
-  .gallery-grid {
-    display:grid;
-    grid-template-columns:1fr !important;
-    gap:1.1rem;
-  }
-  .gallery-item {
-    aspect-ratio: 4 / 3;
-    border-radius:10px;
-    overflow:hidden;
-  }
+.gallery-heading {
+  text-align: left;
+  /* Reduced the bottom margin to decrease the space */
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+  padding: 0 clamp(1.5rem, 4vw, 3rem);
+}
+
+.gallery-subtitle {
+  font-size: clamp(1.9rem, 1.3vw, 1.1rem);
+  font-weight: 500;
+  padding-left: 0.2rem;
+  color: #a0aec0; /* A lighter, secondary color */
+  letter-spacing: 0.05em;
+  margin: 0 0 0.1rem;
+}
+
+
+.stage {
+  width: 100%;
+  /* Reduced the min-height to tighten the vertical space */
+  min-height: 80vh; /* Give the stage some height */
+
+  overflow: hidden;
+  transform-style: preserve-3d;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  position: relative;
+  perspective: 2000px;
+  width: 300px;
+  height: 380px;
+  transform-style: preserve-3d;
+}
+
+.ring, .img {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  position: absolute;
+}
+
+.img {
+  background-size: cover;
+  border-radius: 12px;
+  /* Add a more prominent shadow and a subtle reflection for depth */
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6);
+  -webkit-box-reflect: below 1px linear-gradient(transparent 70%, rgba(0, 0, 0, 0.4));
+}
+
+/* Fallback message if no images are found */
+.gallery-shell-empty {
+  min-height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  text-align: center;
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  font-size: .95rem;
+  opacity: .75;
+  margin: 2rem;
+}
+
+.gallery-shell {
+  position: relative;
+  /* I've reduced the top padding here to decrease the space */
+  padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 4vw, 3rem) clamp(3rem, 7vw, 6rem);
+  max-width: 1500px;
+  margin: 0 auto;
+  color: #e8ecf1;
+}
+
+.gallery-head {
+  text-align: center;
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.gallery-title {
+  font-size: clamp(2.2rem, 5.2vw, 4rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+}
+
+.gallery-sub {
+  margin: 0;
+  font-size: clamp(0.95rem, 1.3vw, 1.25rem);
+  opacity: 0.7;
+}
+
+.masonry-grid {
+  column-count: 1;
+  column-gap: 1.2rem;
+}
+
+@media (min-width: 540px) { .masonry-grid { column-count: 2; } }
+@media (min-width: 900px) { .masonry-grid { column-count: 3; } }
+@media (min-width: 1300px){ .masonry-grid { column-count: 4; } }
+
+.masonry-item {
+  break-inside: avoid;
+  margin: 0 0 1.2rem;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  background: rgba(255,255,255,0.05);
+  /* The following animation properties are removed to disable the fade-in effect */
+  /* animation: fadeInItem 0.7s ease both; */
+  /* animation-delay: var(--delay, 0ms); */
+}
+
+/* This animation is no longer needed */
+/*
+@keyframes fadeInItem {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+*/
+
+.masonry-media img {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* The opacity and transition are removed to make images appear instantly */
+  /* opacity: 0; */
+  /* transition: opacity 500ms ease-in-out; */
+}
+
+/* This rule is no longer necessary */
+/*
+.masonry-item.is-loaded .masonry-media img {
+  opacity: 1;
+}
+*/
+
+.gallery-empty {
+  padding: 3rem 1rem;
+  text-align: center;
+  border: 1px dashed rgba(255,255,255,0.15);
+  border-radius: 14px;
+  font-size: .95rem;
+  opacity: .75;
+}
+
+/* Lightbox Styles */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 12000;
+  background: rgba(10, 16, 28, 0.85);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 3rem);
+  animation: lboxIn .4s ease;
+}
+
+@keyframes lboxIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.lightbox-inner {
+  position: relative;
+  max-width: 90vw;
+  max-height: 85vh;
+}
+
+.lightbox-img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  animation: imgIn .5s ease;
+}
+
+@keyframes imgIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.lightbox-close:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.lightbox-meta {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.7;
 }

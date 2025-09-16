@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Preloader from './components/Preloader';
-import FlagshipHero from './components/FlagshipHero';
-import GallerySection from './components/GallerySection';
-import FinalSection from './components/FinalSection';
 import Navbar from './components/Navbar';
+import FlagshipHero from './components/FlagshipHero';
+import AboutSection from './components/AboutSection'; // Import the new component
+import GallerySection from './components/GallerySection';
+import Speakers from './components/Speakers'; // Import the new component
+import FinalSection from './components/FinalSection';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -26,14 +28,34 @@ export default function App() {
         <div className="wrapper-row">
           <Navbar />
         </div>
-        {!loading && <FlagshipHero key="flagship-hero" active={!loading} />}
+        
+        {/* Assign an ID to each section for navigation */}
+        <section id="home">
+          {!loading && <FlagshipHero key="flagship-hero" active={!loading} />}
+        </section>
+
         <div className="app-sections">
-          <section>
+          {/* Add the new About section here */}
+          <section id="about">
+            <div className="section-inner">
+              <AboutSection />
+            </div>
+          </section>
+
+          <section id="gallery">
             <div className="section-inner">
               <GallerySection />
             </div>
           </section>
-          <section>
+
+          {/* Add the new Speakers section here */}
+          <section id="speakers">
+            <div className="section-inner">
+              <Speakers />
+            </div>
+          </section>
+
+          <section id="contact">
             <div className="section-inner">
               <FinalSection />
             </div>

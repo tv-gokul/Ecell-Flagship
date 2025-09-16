@@ -5,7 +5,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background:#050608;
+  /* Make hero transparent to show the global gradient */
+  background: transparent;
   overflow: hidden;
   font-family: "SF Pro Display", Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
   letter-spacing: -0.02em;
@@ -19,8 +20,9 @@
 }
 
 .titanium-base {
-  background:
-    radial-gradient(circle at 50% 120%, #0c0f14 0%, #06080c 55%, #030406 100%);
+  /* This was creating a solid black background, hiding the global gradient.
+     Setting it to 'none' makes the hero transparent again. */
+  background: none;
   filter: saturate(110%);
 }
 
@@ -89,9 +91,13 @@
   justify-content: center;
   padding: clamp(2rem, 6vw, 6rem) 1.5rem 4rem;
   overflow: hidden;
-  background:
-    radial-gradient(115% 95% at 50% 70%, #121314 0%, #08090b 55%, #040405 78%, #000 100%);
+  /* Make shell transparent to show the global gradient */
+  background: transparent;
   isolation: isolate;
+
+  /* This creates a softer, more gradual fade-out effect at the bottom */
+  mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
 }
 
 .flagship-hero-shell::after {
@@ -149,8 +155,91 @@
   position: relative;
   z-index: 2;
   text-align: center;
-  max-width: 1600px;
-  width: 100%;
+}
+
+/* --- Remove the old scroll indicator styles --- */
+/*
+.scroll-indicator { ... }
+@keyframes scroll-bounce { ... }
+*/
+
+/* --- New Multi-Arrow Scroll Indicator --- */
+.arrow-container {
+  display: block;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  bottom: 1rem; /* Position at the bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.4s ease;
+  opacity: 0;
+  /* Delay animation until after title appears */
+  animation: fadeInIndicator 1s ease 3s forwards;
+}
+
+@keyframes fadeInIndicator {
+  to {
+    opacity: 1;
+  }
+}
+
+.arrow-container:hover {
+  cursor: pointer;
+}
+
+.arrow {
+  position: absolute;
+  left: 50%;
+  transition: all 0.4s ease;
+}
+
+.arrow::before,
+.arrow::after {
+  transition: all 0.4s ease;
+  content: '';
+  display: block;
+  position: absolute;
+  transform-origin: bottom right;
+  background: #fff;
+  width: 4px; /* $arrow-line-width */
+  height: 50px; /* $arrow-line-length */
+  border-radius: 10px;
+  transform: translate(-50%, -50%) rotateZ(-45deg);
+  /* Add a shadow for better contrast against the background */
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7));
+}
+
+.arrow::after {
+  transform-origin: bottom left;
+  transform: translate(-50%, -50%) rotateZ(45deg);
+}
+
+/* Staggered arrow positions and opacities */
+.arrow:nth-child(1) {
+  opacity: 0.5; /* Increased from 0.3 */
+  top: 35%; /* 15 + (100 * 1/5) */
+}
+.arrow:nth-child(2) {
+  opacity: 0.75; /* Increased from 0.6 */
+  top: 55%; /* 15 + (100 * 2/5) */
+}
+.arrow:nth-child(3) {
+  opacity: 1; /* Increased from 0.9 */
+  top: 75%; /* 15 + (100 * 3/5) */
+}
+
+/* Hover effect */
+.arrow-container:hover .arrow {
+  top: 50%;
+}
+
+.arrow-container:hover .arrow::before {
+  transform: translate(-50%, -50%) rotateZ(-30deg);
+}
+
+.arrow-container:hover .arrow::after {
+  transform: translate(-50%, -50%) rotateZ(30deg);
 }
 
 .flagship-title {

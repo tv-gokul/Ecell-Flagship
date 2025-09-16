@@ -1,7 +1,11 @@
 html, body {
   min-height: 100%;
-  background: #000;      /* solid black */
-  color: #e5e7eb;        /* optional default text color */
+  /* Use the CSS variable for the gradient */
+  background: var(--page-gradient);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #e5e7eb;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -19,18 +23,24 @@ html, body {
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-full: 999px;
+
+  /* Define the gradient in a variable for reuse if needed */
+  --page-gradient:
+    radial-gradient(60% 55% at 50% 35%, rgba(40, 88, 170, 0.20) 0%, rgba(0, 0, 0, 0) 60%),
+    radial-gradient(50% 60% at 50% 75%, rgba(12, 40, 95, 0.18) 0%, rgba(0, 0, 0, 0) 70%),
+    linear-gradient(180deg, #010204 0%, #040c16 35%, #062142 68%, #030d19 100%);
 }
 
 html {
-  font-size: 100%;
-  -webkit-text-size-adjust: 100%;
+  /* Enable smooth scrolling for the whole page */
+  scroll-behavior: smooth;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 body {
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   margin:0;
   overflow-x:hidden;
-  background:#000;
   color:#e5e7eb;
 }
 
@@ -83,4 +93,9 @@ img, video {
 @media (max-width:480px){
   html { font-size: 93%; }
   body { font-size: 0.98rem; }
+}
+
+/* Ensure other sections don't have their own background */
+.app-root, .app-sections > section, .section-inner {
+  background-color: transparent;
 }
