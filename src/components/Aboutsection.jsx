@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './AboutSection.css';
+import './Aboutsection.css';
 import logo from '../assets/logo.png';
 
 export default function AboutSection() {
