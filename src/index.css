@@ -1,7 +1,7 @@
 html, body {
   min-height: 100%;
   /* Use the CSS variable for the gradient */
-  background: var(--page-gradient);
+  background-color: #000;
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
@@ -42,6 +42,7 @@ body {
   margin:0;
   overflow-x:hidden;
   color:#e5e7eb;
+  background-color: transparent; /* Ensure no background color hides the galaxy */
 }
 
 /* When the body has the is-loading class */
@@ -98,4 +99,8 @@ img, video {
 /* Ensure other sections don't have their own background */
 .app-root, .app-sections > section, .section-inner {
   background-color: transparent;
+}
+
+.app-root > section, .about-section, .gallery-shell, .speakers-shell, .final-section-shell {
+  background-color: transparent !important;
 }

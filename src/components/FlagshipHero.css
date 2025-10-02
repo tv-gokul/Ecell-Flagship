@@ -1,124 +1,46 @@
-.flagship-hero {
-  position: relative;
-  min-height: 80vh;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* Make hero transparent to show the global gradient */
-  background: transparent;
-  overflow: hidden;
-  font-family: "SF Pro Display", Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-  letter-spacing: -0.02em;
-  isolation:isolate;
-}
-
-.flagship-bg-layers > * {
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-}
-
-.titanium-base {
-  /* This was creating a solid black background, hiding the global gradient.
-     Setting it to 'none' makes the hero transparent again. */
-  background: none;
-  filter: saturate(110%);
-}
-
-.titanium-glow {
-  mix-blend-mode: screen;
-  background:
-    radial-gradient(ellipse at 50% 40%, rgba(120,150,210,0.18) 0%, rgba(40,60,90,0.05) 40%, transparent 70%),
-    radial-gradient(ellipse at 50% 65%, rgba(180,210,255,0.10), transparent 65%);
-  opacity:0.9;
-  filter: blur(18px);
-}
-
-.titanium-vignette {
-  background:
-    radial-gradient(circle at 50% 60%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.25) 60%, rgba(0,0,0,0.65) 100%);
-  mix-blend-mode: multiply;
-}
-
-.titanium-sheen {
-  background:
-    conic-gradient(from 210deg at 50% 50%, rgba(255,255,255,0.0) 0deg,
-      rgba(255,255,255,0.12) 40deg,
-      rgba(255,255,255,0.35) 70deg,
-      rgba(255,255,255,0.10) 92deg,
-      rgba(255,255,255,0.0) 140deg,
-      rgba(255,255,255,0.0) 360deg);
-  opacity:0.35;
-  mask: radial-gradient(circle at 50% 55%, black 0%, black 58%, transparent 75%);
-  mix-blend-mode: screen;
-}
-
-.titanium-pass {
-  width:140%;
-  background:
-    linear-gradient(100deg,
-      rgba(255,255,255,0) 0%,
-      rgba(255,255,255,0.06) 35%,
-      rgba(255,255,255,0.25) 50%,
-      rgba(255,255,255,0.06) 65%,
-      rgba(255,255,255,0) 100%);
-  mask: radial-gradient(ellipse at 50% 55%, black 0%, black 58%, transparent 75%);
-  mix-blend-mode: screen;
-  opacity:0.35;
-}
-
-.grain {
-  background:
-    repeating-conic-gradient(from 0deg, rgba(255,255,255,0.015) 0deg 6deg, transparent 6deg 12deg);
-  opacity:0.35;
-  mix-blend-mode: overlay;
-  animation: grainMove 8s linear infinite;
-  filter: contrast(120%) brightness(120%);
-}
-
-@keyframes grainMove {
-  0% { transform: translate3d(0,0,0) scale(1); }
-  50% { transform: translate3d(-1.5%,1.2%,0) scale(1.02); }
-  100% { transform: translate3d(0,0,0) scale(1); }
-}
-
 .flagship-hero-shell {
   position: relative;
-  min-height: clamp(540px, 84vh, 900px);
+  min-height: clamp(540px, 90vh, 950px); /* Slightly taller */
   display: flex;
+  flex-direction: column; /* Use column for better vertical control */
   align-items: center;
   justify-content: center;
-  padding: clamp(2rem, 6vw, 6rem) 1.5rem 4rem;
+  padding: clamp(2rem, 6vw, 6rem) 1.5rem;
   overflow: hidden;
-  /* Make shell transparent to show the global gradient */
   background: transparent;
   isolation: isolate;
-
-  /* This creates a softer, more gradual fade-out effect at the bottom */
-  mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+  font-family: "SF Pro Display", Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
 }
 
 .flagship-hero-shell::after {
-  content:"";
-  position:absolute;
-  inset:0;
+  content: "";
+  position: absolute;
+  inset: 0;
   background:
     radial-gradient(70% 55% at 50% 55%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 65%, rgba(0,0,0,0.65) 100%),
     linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.55));
-  pointer-events:none;
-  z-index:1;
-  mix-blend-mode:normal;
+  pointer-events: none;
+  z-index: 1;
 }
 
+/* --- Background Layers & Effects --- */
+.flagship-bg-layers > * {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.titanium-base {
+  background: none;
+  filter: saturate(110%);
+}
 .hero-bg-layer {
   position: absolute;
   inset: 0;
   overflow: hidden;
   z-index: 0;
 }
-
 .radial-glow {
   position: absolute;
   inset: 0;
@@ -128,7 +50,6 @@
   mix-blend-mode: plus-lighter;
   opacity: .45;
 }
-
 .hero-sheen {
   position: absolute;
   inset: 0;
@@ -139,7 +60,6 @@
   pointer-events: none;
   opacity: .28;
 }
-
 .hero-pass {
   position: absolute;
   top: 0;
@@ -151,125 +71,104 @@
   pointer-events: none;
 }
 
+/* --- Content & Typography --- */
 .flagship-inner {
   position: relative;
   z-index: 2;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
-/* --- Remove the old scroll indicator styles --- */
-/*
-.scroll-indicator { ... }
-@keyframes scroll-bounce { ... }
-*/
-
-/* --- New Multi-Arrow Scroll Indicator --- */
-.arrow-container {
+.presenter-title {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+.hero-logo {
   display: block;
-  width: 100px;
-  height: 100px;
-  position: absolute;
-  bottom: 1rem; /* Position at the bottom */
-  left: 50%;
-  transform: translateX(-50%);
-  transition: all 0.4s ease;
-  opacity: 0;
-  /* Delay animation until after title appears */
-  animation: fadeInIndicator 1s ease 3s forwards;
+  margin: 0 auto 1rem; /* Reduced bottom margin */
+  width: clamp(80px, 15vw, 120px);
+  animation: float 6s ease-in-out infinite;
 }
 
-@keyframes fadeInIndicator {
-  to {
-    opacity: 1;
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-15px) translateX(-5px) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-25px) translateX(0px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-15px) translateX(5px) rotate(2deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
   }
 }
-
-.arrow-container:hover {
-  cursor: pointer;
-}
-
-.arrow {
-  position: absolute;
-  left: 50%;
-  transition: all 0.4s ease;
-}
-
-.arrow::before,
-.arrow::after {
-  transition: all 0.4s ease;
-  content: '';
-  display: block;
-  position: absolute;
-  transform-origin: bottom right;
-  background: #fff;
-  width: 4px; /* $arrow-line-width */
-  height: 50px; /* $arrow-line-length */
-  border-radius: 10px;
-  transform: translate(-50%, -50%) rotateZ(-45deg);
-  /* Add a shadow for better contrast against the background */
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7));
-}
-
-.arrow::after {
-  transform-origin: bottom left;
-  transform: translate(-50%, -50%) rotateZ(45deg);
-}
-
-/* Staggered arrow positions and opacities */
-.arrow:nth-child(1) {
-  opacity: 0.5; /* Increased from 0.3 */
-  top: 35%; /* 15 + (100 * 1/5) */
-}
-.arrow:nth-child(2) {
-  opacity: 0.75; /* Increased from 0.6 */
-  top: 55%; /* 15 + (100 * 2/5) */
-}
-.arrow:nth-child(3) {
-  opacity: 1; /* Increased from 0.9 */
-  top: 75%; /* 15 + (100 * 3/5) */
-}
-
-/* Hover effect */
-.arrow-container:hover .arrow {
-  top: 50%;
-}
-
-.arrow-container:hover .arrow::before {
-  transform: translate(-50%, -50%) rotateZ(-30deg);
-}
-
-.arrow-container:hover .arrow::after {
-  transform: translate(-50%, -50%) rotateZ(30deg);
-}
-
 .flagship-title {
-  font-size: clamp(4rem, 14vw, 13.5rem);
+  font-size: clamp(3rem, 11vw, 10rem);
   font-weight: 600;
-  line-height: 0.82;
+  line-height: 1;
   letter-spacing: -0.04em;
   position: relative;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   white-space: nowrap;
-  font-family: "SF Pro Display", "Inter", system-ui, sans-serif;
   background: none;
+  margin-bottom: clamp(1.5rem, 4vw, 3rem); /* Reduced margin bottom */
 }
-
+.title-content {
+  display: inline-block;
+}
+.flagship-logo {
+  height: clamp(3.5rem, 11vw, 10rem);
+  width: auto;
+  margin-left: clamp(0.5rem, 2vw, 1.5rem);
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,0.55));
+}
 .letter-wrap, .year-char {
   display: inline-block;
   perspective: 800px;
 }
-
 .letter-core, .year-char {
   display: inline-block;
   background: linear-gradient(160deg,#d8d8d8 0%,#ffffff 28%, #bcbcbc 50%, #f5f5f5 70%, #9f9f9f 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   color: transparent;
   text-shadow:
     0 1px 1px rgba(255,255,255,0.35),
     0 4px 14px rgba(0,0,0,0.55);
   filter: drop-shadow(0 8px 18px rgba(0,0,0,0.55));
+  animation: platinum-shine 4s ease-in-out infinite;
+  animation-delay: 2.5s;
 }
-
+@keyframes platinum-shine {
+  0%, 100% {
+    text-shadow:
+      0 1px 1px rgba(255,255,255,0.35),
+      0 4px 14px rgba(0,0,0,0.55),
+      0 0 5px rgba(220, 235, 255, 0.2),
+      0 0 15px rgba(220, 235, 255, 0.1);
+    filter: drop-shadow(0 8px 18px rgba(0,0,0,0.55)) brightness(1.05);
+  }
+  50% {
+    text-shadow:
+      0 1px 2px rgba(255,255,255,0.5),
+      0 4px 20px rgba(0,0,0,0.45),
+      0 0 15px rgba(220, 235, 255, 0.4),
+      0 0 30px rgba(220, 235, 255, 0.3);
+    filter: drop-shadow(0 8px 18px rgba(0,0,0,0.55)) brightness(1.15);
+  }
+}
 .year-wrap {
   display: inline-flex;
   margin-left: clamp(.35rem, .7vw, .8rem);
@@ -281,34 +180,84 @@
   top: -.05em;
 }
 
-.year-char {
-  transform-origin: center;
+/* --- Details & Stats --- */
+.hero-details {
+  position: relative;
+  color: rgba(255, 255, 255, 0.5);
+  z-index: 10;
+  text-align: center;
+  width: 100%;
+  max-width: 650px; /* Constrain width for readability */
+}
+.event-info {
+  font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+  line-height: 1.6;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+.stats-container {
+  display: flex;
+  justify-content: center;
+  gap: clamp(2rem, 6vw, 5rem);
+  margin-top: 2.5rem;
+}
+.stat-item {
+  text-align: center;
+}
+.stat-number {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+.stat-label {
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.5rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
-.title-sweep {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.65) 50%, rgba(255,255,255,0) 100%);
-  mix-blend-mode: plus-lighter;
-  pointer-events: none;
-  mask: linear-gradient(#000,#000);
-}
+/* --- RESPONSIVE ADJUSTMENTS --- */
 
-.flagship-sub {
-  margin-top: clamp(1.2rem, 3vw, 2.8rem);
-  font-size: clamp(1rem, 1.45vw, 1.55rem);
-  letter-spacing: .05em;
-  font-weight: 400;
-  color: #d9d9da;
-  max-width: 620px;
-  margin-inline: auto;
-}
-
-@media (max-width: 640px) {
+/* For tablets and smaller devices */
+@media (max-width: 768px) {
   .flagship-title {
+    white-space: normal; /* Allow title to wrap */
+    margin-bottom: 2rem;
+  }
+  .hero-details {
+    max-width: 90%;
+  }
+  .stats-container {
+    flex-wrap: wrap; /* Allow stats to wrap */
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+}
+
+/* For small mobile phones */
+@media (max-width: 480px) {
+  .flagship-hero-shell {
+    padding: 4rem 1rem 3rem;
+    min-height: 80vh;
+  }
+  .flagship-title {
+    font-size: clamp(2.5rem, 15vw, 3rem);
     letter-spacing: -0.03em;
   }
-  .year-wrap {
+   .year-wrap {
     font-size: .42em;
+  }
+  .presenter-title {
+    font-size: clamp(0.9rem, 4vw, 1rem);
+  }
+  .stats-container {
+    flex-direction: column; /* Stack stats vertically */
+    gap: 1.5rem;
+  }
+  .stat-number {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
   }
 }

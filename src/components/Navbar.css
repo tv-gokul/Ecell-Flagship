@@ -30,7 +30,7 @@
   text-decoration: none;
 }
 .brand-logo {
-  width: 92px;
+  width: 40px;
   max-width: 38vw;
   height: auto;
   display: block;
@@ -284,7 +284,7 @@ nav.navbar {
 /* --- Center Section (Desktop Nav Links) --- */
 .nav-center {
   display: flex;
-  align-items: center; /* Vertically align links and button */
+  align-items: center;
   gap: 2.5rem;
 }
 
@@ -345,56 +345,15 @@ nav.navbar {
 }
 
 /* --- Mobile Navigation --- */
-.nav-hamburger {
-  display: none; /* Hidden on desktop */
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
-  z-index: 1001;
-}
-
+/* All mobile menu button and overlay styles have been removed */
+.nav-hamburger,
 .nav-overlay {
-  display: none; /* Hidden on desktop */
+  display: none !important;
 }
 
-/* --- Responsive Breakpoint for Mobile --- */
+/* On smaller screens, hide the center nav if it doesn't fit */
 @media (max-width: 1024px) {
-  /* Hide desktop elements */
   .nav-center {
     display: none;
-  }
-
-  /* Show mobile hamburger button */
-  .nav-hamburger {
-    display: flex;
-  }
-
-  /* Style the mobile overlay menu */
-  .nav-overlay {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    position: fixed;
-    inset: 0;
-    background: rgba(10, 16, 28, 0.95);
-    backdrop-filter: blur(10px);
-    transform: translateX(100%);
-    transition: transform 0.4s cubic-bezier(0.2, 1, 0.3, 1);
-  }
-
-  .nav-overlay.open {
-    transform: translateX(0);
-  }
-
-  .nav-overlay .nav-link {
-    font-size: 1.5rem;
-  }
-  
-  .nav-overlay .cta-btn {
-    font-size: 1.2rem;
-    padding: 0.8rem 2rem;
   }
 }

@@ -1,49 +1,25 @@
 "use client";
 import React from 'react';
 import './Speakers.css';
+import comingSoonImg from '../assets/Speakers/comingsoon.png';
 
 // --- Speaker Data ---
 // Add the social media links for each speaker.
 const speakers = [
   {
-    name: 'Ishan Sharma',
-    title: 'Founder, Markitup',
-    image: 'https://i.pravatar.cc/400?u=ishan',
-    social: {
-      twitter: 'https://twitter.com/ishansharma7390',
-      linkedin: 'https://linkedin.com/in/ishansharma7390',
-      portfolio: 'https://markitup.in/'
-    }
+    name: 'Coming Soon',
+    title: '',
+    image: comingSoonImg,
   },
   {
-    name: 'Neha Agarwal',
-    title: 'CEO, Innopreneur',
-    image: 'https://i.pravatar.cc/400?u=neha',
-    social: {
-      twitter: '#',
-      linkedin: '#',
-      portfolio: '#'
-    }
+    name: 'Coming Soon',
+    title: '',
+    image: comingSoonImg,
   },
   {
-    name: 'Sonal Goel',
-    title: 'IAS Officer',
-    image: 'https://i.pravatar.cc/400?u=sonal',
-    social: {
-      twitter: '#',
-      linkedin: '#',
-      portfolio: '#'
-    }
-  },
-  {
-    name: 'Ankit Singh',
-    title: 'Lead Developer, TechCorp',
-    image: 'https://i.pravatar.cc/400?u=ankit',
-    social: {
-      twitter: '#',
-      linkedin: '#',
-      portfolio: '#'
-    }
+    name: 'Coming Soon',
+    title: '',
+    image: comingSoonImg,
   },
 ];
 
@@ -61,20 +37,9 @@ export default function Speakers() {
               className="picture"
               style={{ backgroundImage: `url(${speaker.image})` }}
             ></div>
-            <div className="social twitter">
-              <a href={speaker.social.twitter} target="_blank" rel="noopener noreferrer">
-                <i className="fa fa-twitter"></i>
-              </a>
-            </div>
-            <div className="social linkedin">
-              <a href={speaker.social.linkedin} target="_blank" rel="noopener noreferrer">
-                <i className="fa fa-linkedin"></i>
-              </a>
-            </div>
-            <div className="social portfolio">
-              <a href={speaker.social.portfolio} target="_blank" rel="noopener noreferrer">
-                <i className="fa fa-link"></i>
-              </a>
+            <div className="speaker-info">
+              <h3 className="speaker-name">{speaker.name}</h3>
+              <p className="speaker-title">{speaker.title}</p>
             </div>
           </div>
         ))}

@@ -3,7 +3,6 @@ import React, { useLayoutEffect, useRef, useMemo } from 'react';
 import { gsap } from 'gsap';
 import './GallerySection.css';
 
-// Automatically import all images from the gallery folder
 const imageModules = import.meta.glob("../assets/gallery/**/*.{png,jpg,jpeg,webp,avif,gif}", {
   eager: true,
   as: "url"
@@ -21,7 +20,6 @@ export default function GallerySection() {
     const ctx = gsap.context(() => {
       const imageElements = gsap.utils.toArray('.img');
 
-      // Function to calculate parallax background position
       const getBgPos = (i) => {
         return (100 - gsap.utils.wrap(0, 360, gsap.getProperty(ring.current, 'rotationY') - 180 - i * -36) / 360 * 500) + 'px 0px';
       };
@@ -54,7 +52,6 @@ export default function GallerySection() {
           });
         }, '-=0.5');
 
-      // Drag functionality
       const dragStart = (e) => {
         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
         xPos.current = Math.round(clientX);
@@ -87,7 +84,6 @@ export default function GallerySection() {
       window.addEventListener('mouseup', dragEnd);
       window.addEventListener('touchend', dragEnd);
 
-      // Cleanup function
       return () => {
         stage.removeEventListener('mousedown', dragStart);
         stage.removeEventListener('touchstart', dragStart);
@@ -97,9 +93,9 @@ export default function GallerySection() {
         window.removeEventListener('touchmove', drag);
       };
 
-    }, componentRoot); // Scope the context to our component
+    }, componentRoot);
 
-    return () => ctx.revert(); // Cleanup GSAP animations and listeners
+    return () => ctx.revert();
   }, [images]);
 
   if (images.length === 0) {
@@ -110,13 +106,11 @@ export default function GallerySection() {
     );
   }
 
-  // We need at least 10 images for the 36-degree steps. We'll loop through the available images.
   const displayImages = Array.from({ length: 10 });
 
   return (
     <section className="gallery-wrapper">
       <div className="gallery-heading">
-        {/* Add the new subtitle here */}
         <h2 className="gallery-subtitle">From last year's Flagship</h2>
         
       </div>

@@ -28,7 +28,7 @@
 
 .speakers-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 3rem;
   justify-items: center;
 }
@@ -110,4 +110,66 @@
 
 .social:hover i {
   font-size: 10vw;
+}
+
+.speaker-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+  color: #fff;
+  transition: all 400ms ease-out;
+  z-index: 1;
+}
+
+.frame:hover .speaker-info {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.speaker-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+}
+
+.speaker-title {
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1024px) {
+  .speakers-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem; /* Adjust gap for smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .speakers-grid {
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 2.5rem;
+  }
+
+  .speakers-shell {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .speakers-main-title {
+    font-size: clamp(2rem, 10vw, 2.8rem); /* Adjust title size for mobile */
+  }
+  
+  .speaker-name {
+    font-size: 1.3rem;
+  }
+
+  .speaker-title {
+    font-size: 0.9rem;
+  }
 }

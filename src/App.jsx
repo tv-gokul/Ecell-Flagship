@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Preloader from './components/Preloader';
+import Galaxy from './components/Galaxy';
 import Navbar from './components/Navbar';
 import FlagshipHero from './components/FlagshipHero';
 import AboutSection from './components/AboutSection'; // Import the new component
@@ -25,6 +26,7 @@ export default function App() {
     <>
       <Preloader onFinish={() => setLoading(false)} />
       <main className="app-root">
+        <Galaxy /> {/* Add the Galaxy component here */}
         <div className="wrapper-row">
           <Navbar />
         </div>
@@ -42,16 +44,15 @@ export default function App() {
             </div>
           </section>
 
-          <section id="gallery">
-            <div className="section-inner">
-              <GallerySection />
-            </div>
-          </section>
-
-          {/* Add the new Speakers section here */}
           <section id="speakers">
             <div className="section-inner">
               <Speakers />
+            </div>
+          </section>
+
+          <section id="gallery">
+            <div className="section-inner">
+              <GallerySection />
             </div>
           </section>
 

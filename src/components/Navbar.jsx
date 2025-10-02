@@ -1,15 +1,15 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import "./Navbar.css";
-import logo from '../assets/logo.png';
+
 import logo2 from '../assets/ecell.png';
 
 // Define your navigation links here
 const navLinks = [
   { href: '#home', label: 'Home' },
   { href: '#about', label: 'About' },
-  { href: '#gallery', label: 'Gallery' },
   { href: '#speakers', label: 'Speakers' },
+  { href: '#gallery', label: 'Gallery' },
   // The "Contact" link is removed
 ];
 
@@ -68,7 +68,7 @@ export default function Navbar() {
             <img src={logo2} alt="E-Cell VNIT Logo" className="navbar-logo-img ecell-logo" />
           </a>
           <a href="#home">
-            <img src={logo} alt="Flagship Logo" className="navbar-logo-img flagship-logo" />
+            
           </a>
         </div>
       

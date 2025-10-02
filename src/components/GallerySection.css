@@ -1,12 +1,10 @@
 .gallery-wrapper {
-  /* Reduced vertical padding for a tighter layout */
   padding: clamp(2.5rem, 6vw, 4rem) 0;
   position: relative;
 }
 
 .gallery-heading {
   text-align: left;
-  /* Reduced the bottom margin to decrease the space */
   margin-bottom: clamp(1rem, 2vw, 1.5rem);
   padding: 0 clamp(1.5rem, 4vw, 3rem);
 }
@@ -15,7 +13,7 @@
   font-size: clamp(1.9rem, 1.3vw, 1.1rem);
   font-weight: 500;
   padding-left: 0.2rem;
-  color: #a0aec0; /* A lighter, secondary color */
+  color: #a0aec0;
   letter-spacing: 0.05em;
   margin: 0 0 0.1rem;
 }
@@ -23,8 +21,7 @@
 
 .stage {
   width: 100%;
-  /* Reduced the min-height to tighten the vertical space */
-  min-height: 80vh; /* Give the stage some height */
+  min-height: 80vh;
 
   overflow: hidden;
   transform-style: preserve-3d;
@@ -52,12 +49,10 @@
 .img {
   background-size: cover;
   border-radius: 12px;
-  /* Add a more prominent shadow and a subtle reflection for depth */
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6);
   -webkit-box-reflect: below 1px linear-gradient(transparent 70%, rgba(0, 0, 0, 0.4));
 }
 
-/* Fallback message if no images are found */
 .gallery-shell-empty {
   min-height: 30vh;
   display: flex;
@@ -74,7 +69,6 @@
 
 .gallery-shell {
   position: relative;
-  /* I've reduced the top padding here to decrease the space */
   padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 4vw, 3rem) clamp(3rem, 7vw, 6rem);
   max-width: 1500px;
   margin: 0 auto;
@@ -116,34 +110,13 @@
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   background: rgba(255,255,255,0.05);
-  /* The following animation properties are removed to disable the fade-in effect */
-  /* animation: fadeInItem 0.7s ease both; */
-  /* animation-delay: var(--delay, 0ms); */
 }
-
-/* This animation is no longer needed */
-/*
-@keyframes fadeInItem {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-*/
 
 .masonry-media img {
   width: 100%;
   height: auto;
   display: block;
-  /* The opacity and transition are removed to make images appear instantly */
-  /* opacity: 0; */
-  /* transition: opacity 500ms ease-in-out; */
 }
-
-/* This rule is no longer necessary */
-/*
-.masonry-item.is-loaded .masonry-media img {
-  opacity: 1;
-}
-*/
 
 .gallery-empty {
   padding: 3rem 1rem;
@@ -154,7 +127,6 @@
   opacity: .75;
 }
 
-/* Lightbox Styles */
 .lightbox {
   position: fixed;
   inset: 0;
