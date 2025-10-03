@@ -23,10 +23,6 @@ export default defineConfig({
           'ogl': ['ogl'],
           // Gesture library for gallery
           'use-gesture': ['@use-gesture/react'],
-          // Three.js if used
-          'three-vendor': ['three', '@react-three/fiber', '@react-three/drei', '@react-three/postprocessing'].filter(pkg => {
-            try { require.resolve(pkg); return true; } catch { return false; }
-          }),
         }
       },
       // Enable tree-shaking

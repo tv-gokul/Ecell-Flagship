@@ -44,6 +44,51 @@
 /* Section spacing + mobile alignment */
 .app-root, main {
   width:100%;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Smooth scroll container */
+.app-sections {
+  position: relative;
+  z-index: 1;
+  transform: translateZ(0);
+}
+
+.app-sections section {
+  position: relative;
+  scroll-margin-top: 80px; /* Offset for fixed navbar */
+}
+
+/* Gallery container - responsive sizing */
+.gallery-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+}
+
+#gallery {
+  padding: 0 !important; /* Remove default section padding for gallery */
+}
+
+@media (max-width: 768px) {
+  .gallery-container {
+    height: 75vh; /* Reduced for tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-container {
+    height: 65vh; /* Further reduced for mobile */
+  }
+}
+
+@media (max-width: 375px) {
+  .gallery-container {
+    height: 60vh; /* Even smaller for small mobile */
+  }
 }
 
 /* Smooth fade-in animation for main content */

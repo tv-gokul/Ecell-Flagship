@@ -1,59 +1,107 @@
-"use client";
 import React, { useEffect, useRef, useState } from "react";
 import "./Herosection.css";
+import logo from "../assets/logo.webp";
 
-export default function HeroSection() {
-  const titleRef = useRef(null);
-  const [isReady, setIsReady] = useState(false);
+function StatCounter({ value, label }) {
+  const ref = useRef(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
-    const el = titleRef.current;
-    if (!el || el.dataset.split) return;
+    if (hasAnimated || !ref.current) return;
 
-    const rawText = el.textContent || "";
-    el.innerHTML = "";
-    el.dataset.split = "true";
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setHasAnimated(true);
+          let start = 0;
+          const end = value;
+          const duration = 2000;
+          const startTime = performance.now();
 
-    rawText.split("").forEach((char, index) => {
-      const wrap = document.createElement("span");
-      wrap.className = "char-wrap";
-      // Set the index as a CSS variable for dynamic delay
-      wrap.style.setProperty("--char-index", index);
+          const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = Math.round(start + (end - start) * eased);
+            
+            if (ref.current) {
+              ref.current.textContent = current.toLocaleString();
+            }
 
-      const inner = document.createElement("span");
-      inner.className = "char";
-      inner.textContent = char === " " ? "\u00A0" : char;
-      wrap.appendChild(inner);
-      el.appendChild(wrap);
-    });
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            }
+          };
 
-    const startAnimation = () => setIsReady(true);
+          requestAnimationFrame(animate);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
 
-    if (window.__preloaderDone) {
-      startAnimation();
-    } else {
-      window.addEventListener("preloader:done", startAnimation, { once: true });
-    }
+    observer.observe(ref.current);
 
-    return () => {
-      window.removeEventListener("preloader:done", startAnimation);
-    };
+    return () => observer.disconnect();
+  }, [hasAnimated, value]);
+
+  return (
+    <div className="stat-item">
+      <p className="stat-number">
+        <span ref={ref}>0</span>+
+      </p>
+      <p className="stat-label">{label}</p>
+    </div>
+  );
+}
+
+export default function Herosection() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    // Trigger animations after component mounts
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
-    <section id="home" className="hero-section section-blend">
-      <div id="hero-logo-dock" className="hero-logo-dock" />
-      <div className="hero-content">
-        <h1
-          className={`hero-title ${isReady ? "title-animate" : ""}`}
-          ref={titleRef}
-          aria-label="FLAGSHIP 25"
-        >
-          FLAGSHIP 25
-        </h1>
-        <p className={`hero-tagline ${isReady ? "tagline-animate" : ""}`}>
-          Tagline or brief description goes here.
+    <section className="hero-section">
+      <div className="hero-container">
+        
+        {/* Presents Text */}
+        <p className={`hero-presents ${isVisible ? 'visible' : ''}`}>
+          E-Cell VNIT presents
         </p>
+
+        {/* Logo - Small at top */}
+        <div className={`hero-logo-wrapper ${isVisible ? 'visible' : ''}`}>
+          <img 
+            src={logo} 
+            alt="E-Cell VNIT" 
+            className="hero-logo"
+            width="120"
+            height="120"
+            loading="eager"
+          />
+        </div>
+
+        {/* Main Title */}
+        <h1 className={`hero-main-title ${isVisible ? 'visible' : ''}`}>
+          <span className="title-flagship">FLAGSHIP</span>
+        </h1>
+
+        {/* Subtitle */}
+        <p className={`hero-subtitle ${isVisible ? 'visible' : ''}`}>
+          October 5, 2025 • VNIT Auditorium • 5 PM onwards
+        </p>
+
+        {/* CTA Buttons */}
+        <div className={`hero-cta ${isVisible ? 'visible' : ''}`}>
+          <a href="#register" className="cta-button cta-primary">Register now</a>
+        </div>
       </div>
     </section>
   );

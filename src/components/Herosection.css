@@ -1,0 +1,308 @@
+/* Apple-inspired minimalist design */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+  z-index: 1;
+}
+
+.hero-container {
+  position: relative;
+  z-index: 1;
+  max-width: 980px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 1.5rem;
+  gap: 1rem;
+}
+
+/* Presents Text */
+.hero-presents {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #86868b;
+  margin: 0 0 1rem 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hero-presents.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Main Title - Apple style */
+.hero-main-title {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  font-size: clamp(3rem, 12vw, 7rem);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.05;
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hero-main-title.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.title-flagship {
+  background: linear-gradient(180deg, #ffffff 0%, #c7c7c7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Subtitle - Apple style */
+.hero-subtitle {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  color: #86868b;
+  margin: 0.5rem 0 0 0;
+  padding: 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s;
+}
+
+.hero-subtitle.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Event Details */
+.hero-details {
+  margin: 1.5rem 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s;
+}
+
+.hero-details.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.event-date {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  font-weight: 500;
+  color: #f5f5f7;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* CTA Buttons - Apple style */
+.hero-cta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s;
+}
+
+.hero-cta.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cta-button {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  border-radius: 980px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+  border: none;
+}
+
+.cta-primary {
+  background: #0071e3;
+  color: #ffffff;
+}
+
+.cta-primary:hover {
+  background: #0077ed;
+  transform: scale(1.02);
+}
+
+.cta-secondary {
+  background: transparent;
+  color: #2997ff;
+  border: 1px solid #2997ff;
+}
+
+.cta-secondary:hover {
+  background: rgba(41, 151, 255, 0.08);
+  transform: scale(1.02);
+}
+
+/* Logo - Small at top */
+.hero-logo-wrapper {
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+}
+
+.hero-logo-wrapper.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-logo {
+  width: 120px;
+  height: auto;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+  animation: float 3s ease-in-out infinite;
+}
+
+.hero-logo:hover {
+  opacity: 1;
+}
+
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px);
+  }
+  50% { 
+    transform: translateY(-15px);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-container { 
+    padding: 2rem 1.25rem; 
+    gap: 0.5rem;
+    min-height: 100vh;
+    justify-content: center;
+  }
+  
+  .hero-presents {
+    font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+    margin: 0 0 0.75rem 0;
+  }
+  
+  .hero-main-title {
+    font-size: clamp(2.5rem, 10vw, 4.5rem);
+    margin: 0.5rem 0;
+  }
+  
+  .hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    padding: 0 0.5rem;
+  }
+  
+  .hero-logo {
+    width: 90px;
+  }
+  
+  .hero-cta {
+    flex-direction: column;
+    width: 100%;
+    max-width: 280px;
+    gap: 0.75rem;
+    margin: 1.25rem 0;
+  }
+  
+  .cta-button {
+    width: 100%;
+    text-align: center;
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-container { 
+    padding: 1.5rem 1rem;
+    gap: 0.4rem;
+  }
+  
+  .hero-presents {
+    font-size: 0.75rem;
+    margin: 0 0 0.5rem 0;
+  }
+  
+  .hero-main-title {
+    font-size: clamp(2rem, 9vw, 3.5rem);
+  }
+  
+  .hero-subtitle {
+    font-size: clamp(0.875rem, 2.2vw, 1.2rem);
+    line-height: 1.5;
+  }
+  
+  .hero-logo {
+    width: 75px;
+  }
+  
+  .hero-logo-wrapper {
+    margin-bottom: 1rem;
+  }
+  
+  .hero-cta {
+    margin: 1rem 0;
+    max-width: 260px;
+  }
+  
+  .cta-button {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9375rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .hero-container {
+    padding: 1.25rem 0.875rem;
+  }
+  
+  .hero-main-title {
+    font-size: clamp(1.75rem, 8vw, 3rem);
+  }
+  
+  .hero-subtitle {
+    font-size: clamp(0.8rem, 2vw, 1.1rem);
+  }
+  
+  .hero-logo {
+    width: 65px;
+  }
+  
+  .cta-button {
+    padding: 0.7rem 1rem;
+    font-size: 0.875rem;
+  }
+}
