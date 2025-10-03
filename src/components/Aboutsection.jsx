@@ -41,7 +41,7 @@ export default function AboutSection() {
         </div>
         {/* The 'is-visible' class triggers the animation */}
         <div className={`about-logo-container ${isVisible ? 'is-visible' : ''}`}>
-          <img src={logo} alt="E-Cell VNIT Logo" className="about-logo" />
+          <img src={logo} alt="E-Cell VNIT Logo" className="about-logo" loading="lazy" />
         </div>
       </div>
     </div>

@@ -36,6 +36,7 @@ export default function Speakers() {
             <div
               className="picture"
               style={{ backgroundImage: `url(${speaker.image})` }}
+              loading="lazy"
             ></div>
             <div className="speaker-info">
               <h3 className="speaker-name">{speaker.name}</h3>
