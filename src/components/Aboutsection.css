@@ -40,7 +40,7 @@
 
 .register-button {
   display: inline-block;
-  background-color: #3b82f6; /* Blue accent */
+  background-color: #1d4ed8; /* Darker blue for better contrast (blue-700) */
   color: #fff;
   padding: 0.8rem 2rem;
   border-radius: 8px;
@@ -50,7 +50,7 @@
 }
 
 .register-button:hover {
-  background-color: #2563eb;
+  background-color: #1e40af; /* Even darker on hover (blue-800) */
   transform: translateY(-2px);
 }
 

@@ -1,8 +1,8 @@
 .flagship-hero-shell {
   position: relative;
-  min-height: clamp(540px, 90vh, 950px); /* Slightly taller */
+  min-height: clamp(540px, 90vh, 950px);
   display: flex;
-  flex-direction: column; /* Use column for better vertical control */
+  flex-direction: column; 
   align-items: center;
   justify-content: center;
   padding: clamp(2rem, 6vw, 6rem) 1.5rem;
@@ -18,57 +18,9 @@
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(70% 55% at 50% 55%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 65%, rgba(0,0,0,0.65) 100%),
-    linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.55));
+  background: transparent;
   pointer-events: none;
   z-index: 1;
-}
-
-/* --- Background Layers & Effects --- */
-.flagship-bg-layers > * {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-.titanium-base {
-  background: none;
-  filter: saturate(110%);
-}
-.hero-bg-layer {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  z-index: 0;
-}
-.radial-glow {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(60% 55% at 50% 42%, rgba(255,255,255,0.10), rgba(0,0,0,0) 70%),
-    radial-gradient(40% 35% at 50% 50%, rgba(120,160,255,0.10), rgba(0,0,0,0) 80%);
-  mix-blend-mode: plus-lighter;
-  opacity: .45;
-}
-.hero-sheen {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(115deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 40%),
-    linear-gradient(250deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0) 55%);
-  mix-blend-mode: overlay;
-  pointer-events: none;
-  opacity: .28;
-}
-.hero-pass {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 30%;
-  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.55) 45%, rgba(255,255,255,0) 100%);
-  filter: blur(14px) brightness(1.15);
-  opacity: .28;
-  pointer-events: none;
 }
 
 /* --- Content & Typography --- */
@@ -92,6 +44,7 @@
   display: block;
   margin: 0 auto 1rem; /* Reduced bottom margin */
   width: clamp(80px, 15vw, 120px);
+  height: auto; /* Maintain aspect ratio */
   animation: float 6s ease-in-out infinite;
 }
 
@@ -137,6 +90,7 @@
 .letter-wrap, .year-char {
   display: inline-block;
   perspective: 800px;
+  will-change: transform, opacity; /* GPU acceleration hint */
 }
 .letter-core, .year-char {
   display: inline-block;
@@ -150,6 +104,7 @@
   filter: drop-shadow(0 8px 18px rgba(0,0,0,0.55));
   animation: platinum-shine 4s ease-in-out infinite;
   animation-delay: 2.5s;
+  will-change: filter; /* GPU acceleration for shine animation */
 }
 @keyframes platinum-shine {
   0%, 100% {
@@ -260,4 +215,69 @@
   .stat-number {
     font-size: clamp(1.8rem, 8vw, 2.5rem);
   }
+}
+/* CSS Animations to replace framer-motion */
+.presenter-title {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transition-delay: 0.1s;
+}
+
+.presenter-title.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.letter-wrap {
+  opacity: 0;
+  transform: translateY(60%) scaleY(1.15); /* Simplified - removed heavy rotateX and skewY */
+  filter: blur(8px); /* Reduced blur from 14px */
+  animation: none;
+  will-change: transform, opacity, filter;
+}
+
+.letter-wrap.active {
+  animation: letterSlideIn 0.6s cubic-bezier(0.16, 0.84, 0.38, 1) forwards; /* Faster: 0.9s -> 0.6s */
+}
+
+@keyframes letterSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0%) scaleY(1); /* Simplified transform */
+    filter: blur(0px);
+  }
+}
+
+.year-char {
+  opacity: 0;
+  transform: translateY(80%); /* Reduced from 140% */
+  filter: blur(6px); /* Reduced blur from 10px */
+  animation: none;
+  will-change: transform, opacity, filter;
+}
+
+.year-char.active {
+  animation: yearSlideIn 0.5s cubic-bezier(0.2, 0.8, 0.3, 1) forwards; /* Faster: 0.8s -> 0.5s */
+}
+
+@keyframes yearSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+    filter: blur(0px);
+  }
+}
+
+.event-info {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Faster: 0.8s -> 0.6s */
+  transition-delay: 0.8s; /* Earlier: 1.2s -> 0.8s */
+  will-change: transform, opacity;
+}
+
+.event-info.active {
+  opacity: 1;
+  transform: translateY(0);
 }

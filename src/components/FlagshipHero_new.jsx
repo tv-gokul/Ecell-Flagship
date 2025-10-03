@@ -1,9 +1,9 @@
 "use client";
-import React, { useEffect, useRef, memo } from "react";
+import React, { useEffect, useRef } from "react";
 import "./FlagshipHero.css";
 import logo from "../assets/logo.webp";
 
-const StatCounter = memo(function StatCounter({ value, label, active }) {
+function StatCounter({ value, label, active }) {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -45,9 +45,9 @@ const StatCounter = memo(function StatCounter({ value, label, active }) {
       <p className="stat-label">{label}</p>
     </div>
   );
-});
+}
 
-const FlagshipHero = memo(function FlagshipHero({ active = false }) {
+export default function FlagshipHero({ active = false }) {
   const title = "FLAGSHIP";
   const year = "'25";
 
@@ -72,7 +72,7 @@ const FlagshipHero = memo(function FlagshipHero({ active = false }) {
                 key={i}
                 className={`letter-wrap ${active ? 'active' : ''}`}
                 style={{ 
-                  animationDelay: `${0.1 + i * 0.04}s`, /* Faster stagger: 0.18 -> 0.1, 0.05 -> 0.04 */
+                  animationDelay: `${0.18 + i * 0.05}s`,
                   '--letter-index': i
                 }}
               >
@@ -87,7 +87,7 @@ const FlagshipHero = memo(function FlagshipHero({ active = false }) {
                 <span
                   key={c + i}
                   className={`year-char ${active ? 'active' : ''}`}
-                  style={{ animationDelay: `${0.7 + i * 0.06}s` }} /* Earlier start: 1.0 -> 0.7 */
+                  style={{ animationDelay: `${1.0 + i * 0.08}s` }}
                 >
                   {c}
                 </span>
@@ -111,6 +111,4 @@ const FlagshipHero = memo(function FlagshipHero({ active = false }) {
     
     </div>
   );
-});
-
-export default FlagshipHero;
+}

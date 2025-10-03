@@ -46,6 +46,16 @@
   width:100%;
 }
 
+/* Smooth fade-in animation for main content */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* Ensure content starts below fixed nav */
 body, .app-root, main {
   padding-top: var(--nav-height, 62px);
@@ -77,9 +87,10 @@ body, .app-root, main {
   border-top:1px solid rgba(255,255,255,0.06);
 }
 
-/* Optional subtle top fade divider on mobile */
+/* Optional subtle top fade divider on mobile - DISABLED */
 .app-sections > * + *::before {
-  content:"";
+  display: none;
+  /* content:"";
   position:absolute;
   top:-1px;
   left:0;
@@ -87,7 +98,7 @@ body, .app-root, main {
   height:42px;
   pointer-events:none;
   background:linear-gradient(to bottom, rgba(255,255,255,0.08), rgba(255,255,255,0));
-  opacity:0.15;
+  opacity:0.15; */
 }
 
 @media (min-width:900px){
@@ -127,6 +138,18 @@ body, .app-root, main {
 
 .app-sections > section + section {
   border-top:1px solid rgba(255,255,255,0.07);
+}
+
+/* Gallery section specific styles */
+#gallery {
+  min-height: 100vh;
+  position: relative;
+}
+
+#gallery .section-inner {
+  height: 100vh;
+  min-height: 800px;
+  padding: 0;
 }
 
 @media (max-width:480px){

@@ -329,8 +329,8 @@ nav.navbar {
   display: inline-flex;
   align-items: center;
   padding: 0.5rem 1.2rem;
-  border: 1px solid #3b82f6;
-  background-color: #3b82f6;
+  border: 1px solid #1d4ed8;
+  background-color: #1d4ed8; /* Darker blue for better contrast (blue-700) */
   color: #fff;
   border-radius: 999px;
   font-weight: 600;
@@ -341,7 +341,8 @@ nav.navbar {
 
 .cta-btn:hover {
   background-color: transparent;
-  color: #3b82f6;
+  color: #1d4ed8;
+  border-color: #1d4ed8;
 }
 
 /* --- Mobile Navigation --- */

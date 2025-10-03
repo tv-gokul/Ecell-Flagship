@@ -17,15 +17,15 @@ export default function FinalSection() {
       <form className="registration-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name" className="form-label">Full Name</label>
-          <input type="text" id="name" name="name" className="form-input" placeholder="Enter your full name" required />
+          <input type="text" id="name" name="name" className="form-input" placeholder="Enter your full name" autoComplete="name" required />
         </div>
         <div className="form-group">
           <label htmlFor="email" className="form-label">Email Address</label>
-          <input type="email" id="email" name="email" className="form-input" placeholder="Enter your email address" required />
+          <input type="email" id="email" name="email" className="form-input" placeholder="Enter your email address" autoComplete="email" required />
         </div>
         <div className="form-group">
           <label htmlFor="college" className="form-label">College / Organization</label>
-          <input type="text" id="college" name="college" className="form-input" placeholder="Enter your college or organization" required />
+          <input type="text" id="college" name="college" className="form-input" placeholder="Enter your college or organization" autoComplete="organization" required />
         </div>
         <button type="submit" className="submit-button">
           Register Now

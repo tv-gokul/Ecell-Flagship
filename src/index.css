@@ -1,7 +1,7 @@
 html, body {
   min-height: 100%;
-  /* Use the CSS variable for the gradient */
-  background-color: #000;
+  /* Match the Galaxy background color to prevent white flash */
+  background-color: #0a0e1a;
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
