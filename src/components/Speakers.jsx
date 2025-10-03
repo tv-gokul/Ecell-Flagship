@@ -1,25 +1,27 @@
 "use client";
 import React from 'react';
 import './Speakers.css';
-import comingSoonImg from '../assets/Speakers/comingsoon.webp';
+import speaker1 from '../assets/Speakers/6.png';
+import speaker2 from '../assets/Speakers/7.png';
+import speaker3 from '../assets/Speakers/8.png';
 
 // --- Speaker Data ---
 // Add the social media links for each speaker.
 const speakers = [
   {
-    name: 'Coming Soon',
-    title: '',
-    image: comingSoonImg,
+    name: 'Anup Gupta',
+    title: 'Founder, MathonGo & Angel Investor',
+    image: speaker1,
   },
   {
-    name: 'Coming Soon',
-    title: '',
-    image: comingSoonImg,
+    name: 'Tharun Naik',
+    title: 'Founder, Adko; 3X TEDx Speaker, IIT KGP Alumnus',
+    image: speaker2,
   },
   {
-    name: 'Coming Soon',
-    title: '',
-    image: comingSoonImg,
+    name: 'Sanjay Arora',
+    title: 'Founder & CEO, Shells Advertisement',
+    image: speaker3,
   },
 ];
 

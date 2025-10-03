@@ -35,9 +35,8 @@ export default function AboutSection() {
         <div className="about-text">
           <h2 className="about-title">About Flagship</h2>
           <p>
-            Flagship'24 is the inaugural event of entrepreneurship Cell of VNIT that aims to foster innovation, entrepreneurship, and leadership among young minds. This event marks the conclave of pioneering personalities that have proven themselves in different walks of life. Elite speakers who have demonstrated their expertise on the international stage and can inspire the crowd with their interactions are invited every year. Last year Flagship'23 was graced by some of the esteemed personalities like Ishan Sharma, Neha Agarwal and Sonal Goel.
+            Flagship'25 is the inaugural event of entrepreneurship Cell of VNIT that aims to foster innovation, entrepreneurship, and leadership among young minds. This event marks the conclave of pioneering personalities that have proven themselves in different walks of life. Elite speakers who have demonstrated their expertise on the international stage and can inspire the crowd with their interactions are invited every year. Last year Flagship'23 was graced by some of the esteemed personalities like Ishan Sharma, Neha Agarwal and Sonal Goel.
           </p>
-          <a href="#register" className="register-button">Register Now</a>
         </div>
         {/* The 'is-visible' class triggers the animation */}
         <div className={`about-logo-container ${isVisible ? 'is-visible' : ''}`}>

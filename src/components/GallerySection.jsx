@@ -480,39 +480,43 @@ export default function CircularGallery({
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
       <div style={{
         position: 'absolute',
-        top: '2%',
-        left: '50%',
-        transform: 'translateX(-50%)',
+        top: '0',
+        left: '0',
+        right: '0',
         zIndex: 20,
         textAlign: 'center',
         pointerEvents: 'none',
-        width: '100%',
-        paddingBottom: '2rem'
+        padding: '1rem clamp(0.5rem, 2vw, 1.5rem)',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'flex-start'
       }}>
         <h2 style={{
           fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
-          fontSize: 'clamp(1.75rem, 4vw, 3rem)',
+          fontSize: 'clamp(1.25rem, 3.5vw, 3rem)',
           fontWeight: '700',
           margin: '0',
-          letterSpacing: '0.02em',
-          lineHeight: '1.2',
+          letterSpacing: '0.01em',
+          lineHeight: '1.3',
           background: 'linear-gradient(135deg, #fff 0%, #a8b4ff 100%)',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',
           textShadow: '0 2px 20px rgba(168, 180, 255, 0.3)',
-          padding: '0.75rem 1.5rem',
+          padding: 'clamp(0.5rem, 1.5vw, 0.75rem) clamp(1rem, 3vw, 1.5rem)',
           backgroundColor: 'rgba(10, 14, 26, 0.85)',
           backdropFilter: 'blur(15px)',
-          borderRadius: '12px',
+          borderRadius: 'clamp(8px, 1.5vw, 12px)',
           display: 'inline-block',
-          whiteSpace: 'normal',
-          wordSpacing: '0.1em'
+          whiteSpace: 'nowrap',
+          maxWidth: '95%',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis'
         }}>
           Glimpses of Last Year
         </h2>
       </div>
-      <div className="circular-gallery" ref={containerRef} style={{ paddingTop: '120px' }} />
+      <div className="circular-gallery" ref={containerRef} style={{ paddingTop: 'clamp(80px, 15vh, 120px)' }} />
     </div>
   );
 }

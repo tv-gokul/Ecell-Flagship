@@ -90,13 +90,20 @@ export default function Herosection() {
 
         {/* Main Title */}
         <h1 className={`hero-main-title ${isVisible ? 'visible' : ''}`}>
-          <span className="title-flagship">FLAGSHIP</span>
+          <span className="title-flagship">FLAGSHIP '25</span>
         </h1>
 
         {/* Subtitle */}
         <p className={`hero-subtitle ${isVisible ? 'visible' : ''}`}>
           October 5, 2025 • VNIT Auditorium • 5 PM onwards
         </p>
+
+        {/* Statistics */}
+        <div className={`hero-stats ${isVisible ? 'visible' : ''}`}>
+          <StatCounter value={10000} label="Reach" />
+          <StatCounter value={5000} label="Footfall" />
+          <StatCounter value={3} label="Speakers" />
+        </div>
 
         {/* CTA Buttons */}
         <div className={`hero-cta ${isVisible ? 'visible' : ''}`}>

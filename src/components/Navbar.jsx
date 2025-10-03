@@ -82,8 +82,6 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
-          {/* The Register button is now part of the central navigation */}
-          <a href="#register" className="cta-btn">Register</a>
         </nav>
 
         <div className="nav-right">
@@ -122,14 +120,6 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-          <div className="overlay-footer">
-            <button
-              className="cta-btn wide"
-              onClick={() => setOpen(false)}
-            >
-              Register Now
-            </button>
-          </div>
         </div>
       </div>
     </header>
