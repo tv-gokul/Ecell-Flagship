@@ -3,9 +3,9 @@ import Preloader from './components/Preloader';
 import Galaxy from './components/Galaxy';
 import Navbar from './components/Navbar';
 import FlagshipHero from './components/FlagshipHero';
-import AboutSection from './components/Aboutsection'; // Import the new component
+import AboutSection from './components/Aboutsection';
 import GallerySection from './components/GallerySection';
-import Speakers from './components/Speakers'; // Import the new component
+import Speakers from './components/Speakers';
 import FinalSection from './components/FInalSection';
 
 export default function App() {
