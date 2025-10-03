@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Navbar from './components/Navbar';
-import HeroSection from './components/Herosection';
+import HeroSection from './components/HeroSection';
 import Galaxy from './components/Galaxy';
 import AboutSection from './components/Aboutsection';
 import GallerySection from './components/GallerySection';
