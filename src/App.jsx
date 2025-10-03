@@ -6,7 +6,7 @@ import FlagshipHero from './components/FlagshipHero';
 import AboutSection from './components/AboutSection'; // Import the new component
 import GallerySection from './components/GallerySection';
 import Speakers from './components/Speakers'; // Import the new component
-import FinalSection from './components/FinalSection';
+import FinalSection from './components/FInalSection';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
