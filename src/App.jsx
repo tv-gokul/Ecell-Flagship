@@ -3,7 +3,7 @@ import Preloader from './components/Preloader';
 import Galaxy from './components/Galaxy';
 import Navbar from './components/Navbar';
 import FlagshipHero from './components/FlagshipHero';
-import AboutSection from './components/AboutSection'; // Import the new component
+import AboutSection from './components/Aboutsection'; // Import the new component
 import GallerySection from './components/GallerySection';
 import Speakers from './components/Speakers'; // Import the new component
 import FinalSection from './components/FInalSection';
