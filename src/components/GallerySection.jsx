@@ -3,7 +3,7 @@ import React, { useLayoutEffect, useRef, useMemo } from 'react';
 import { gsap } from 'gsap';
 import './GallerySection.css';
 
-const imageModules = import.meta.glob("../assets/gallery/**/*.{png,jpg,jpeg,webp,avif,gif}", {
+const imageModules = import.meta.glob("../assets/gallery/**/*.webp", {
   eager: true,
   as: "url"
 });

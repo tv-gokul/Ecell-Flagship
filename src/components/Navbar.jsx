@@ -10,7 +10,7 @@ const navLinks = [
   { href: '#about', label: 'About' },
   { href: '#speakers', label: 'Speakers' },
   { href: '#gallery', label: 'Gallery' },
-  // The "Contact" link is removed
+  { href: '#register', label: 'Register' },
 ];
 
 export default function Navbar() {
@@ -83,7 +83,7 @@ export default function Navbar() {
             </a>
           ))}
           {/* The Register button is now part of the central navigation */}
-          <button className="cta-btn">Register</button>
+          <a href="#register" className="cta-btn">Register</a>
         </nav>
 
         <div className="nav-right">

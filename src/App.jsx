@@ -25,44 +25,44 @@ export default function App() {
   return (
     <>
       <Preloader onFinish={() => setLoading(false)} />
-      <main className="app-root">
-        <Galaxy /> {/* Add the Galaxy component here */}
-        <div className="wrapper-row">
-          <Navbar />
-        </div>
-        
-        {/* Assign an ID to each section for navigation */}
-        <section id="home">
-          {!loading && <FlagshipHero key="flagship-hero" active={!loading} />}
-        </section>
-
-        <div className="app-sections">
-          {/* Add the new About section here */}
-          <section id="about">
-            <div className="section-inner">
-              <AboutSection />
-            </div>
+      {!loading && (
+        <main className="app-root">
+          <Galaxy />
+          <div className="wrapper-row">
+            <Navbar />
+          </div>
+          
+          <section id="home">
+            <FlagshipHero key="flagship-hero" active={!loading} />
           </section>
 
-          <section id="speakers">
-            <div className="section-inner">
-              <Speakers />
-            </div>
-          </section>
+          <div className="app-sections">
+            <section id="about">
+              <div className="section-inner">
+                <AboutSection />
+              </div>
+            </section>
 
-          <section id="gallery">
-            <div className="section-inner">
-              <GallerySection />
-            </div>
-          </section>
+            <section id="speakers">
+              <div className="section-inner">
+                <Speakers />
+              </div>
+            </section>
 
-          <section id="contact">
-            <div className="section-inner">
-              <FinalSection />
-            </div>
-          </section>
-        </div>
-      </main>
+            <section id="gallery">
+              <div className="section-inner">
+                <GallerySection />
+              </div>
+            </section>
+
+            <section id="register">
+              <div className="section-inner">
+                <FinalSection />
+              </div>
+            </section>
+          </div>
+        </main>
+      )}
     </>
   );
 }

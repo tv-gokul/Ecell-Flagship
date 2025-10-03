@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './Aboutsection.css';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo.webp';
 
 export default function AboutSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -41,7 +41,7 @@ export default function AboutSection() {
         </div>
         {/* The 'is-visible' class triggers the animation */}
         <div className={`about-logo-container ${isVisible ? 'is-visible' : ''}`}>
-          <img src={logo} alt="E-Cell VNIT Logo" className="about-logo" loading="lazy" />
+          <img src={logo} alt="E-Cell VNIT Logo" className="about-logo" loading="lazy" width="200" height="200" />
         </div>
       </div>
     </div>

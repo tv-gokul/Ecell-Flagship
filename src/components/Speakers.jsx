@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import './Speakers.css';
-import comingSoonImg from '../assets/Speakers/comingsoon.png';
+import comingSoonImg from '../assets/Speakers/comingsoon.webp';
 
 // --- Speaker Data ---
 // Add the social media links for each speaker.
@@ -33,11 +33,14 @@ export default function Speakers() {
       <div className="speakers-grid">
         {speakers.map((speaker, index) => (
           <div key={index} className="frame">
-            <div
+            <img
+              src={speaker.image}
+              alt={speaker.name}
               className="picture"
-              style={{ backgroundImage: `url(${speaker.image})` }}
               loading="lazy"
-            ></div>
+              width="400"
+              height="300"
+            />
             <div className="speaker-info">
               <h3 className="speaker-name">{speaker.name}</h3>
               <p className="speaker-title">{speaker.title}</p>

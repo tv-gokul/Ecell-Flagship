@@ -2,7 +2,7 @@
 import React, { useMemo, useEffect, useRef } from "react";
 import { motion, animate } from "framer-motion";
 import "./FlagshipHero.css";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo.webp";
 
 function StatCounter({ value, label, active }) {
   const ref = useRef(null);
