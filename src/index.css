@@ -1,5 +1,7 @@
 html, body {
   min-height: 100%;
+  width: 100%;
+  max-width: 100vw;
   /* Match the Galaxy background color to prevent white flash */
   background-color: #0a0e1a;
   background-attachment: fixed;
@@ -7,6 +9,7 @@ html, body {
   background-size: cover;
   color: #e5e7eb;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 :root {
@@ -15,10 +18,11 @@ html, body {
   --bp-md: 768px;
   --bp-lg: 1024px;
   --bp-xl: 1280px;
-  --content-max: 1280px;
+  --content-max: 1400px;
   --gutter-xs: 1rem;
   --gutter-sm: 1.5rem;
   --gutter-md: 2rem;
+  --gutter-lg: 3rem;
   --transition-base: 300ms cubic-bezier(.65,.05,.25,1);
   --radius-sm: 6px;
   --radius-md: 12px;
@@ -51,9 +55,10 @@ html::-webkit-scrollbar {
 
 body {
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  margin:0;
-  overflow-x:hidden;
-  color:#e5e7eb;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  color: #e5e7eb;
   background-color: transparent; /* Ensure no background color hides the galaxy */
   /* Hide scrollbar for Chrome, Safari and Opera */
   scrollbar-width: none; /* Firefox */
@@ -87,14 +92,14 @@ body:not(.is-loading) .preloader {
 }
 
 .wrapper-row {
-  width:100%;
+  width: 100%;
   max-width: var(--content-max);
-  margin:0 auto;
-  padding-left: var(--gutter-xs);
-  padding-right: var(--gutter-xs);
+  margin: 0 auto;
+  padding-left: clamp(1rem, 3vw, 3rem);
+  padding-right: clamp(1rem, 3vw, 3rem);
 }
 
-@media (min-width:640px){
+@media (min-width: 640px) {
   .wrapper-row {
     padding-left: var(--gutter-sm);
     padding-right: var(--gutter-sm);

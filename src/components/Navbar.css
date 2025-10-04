@@ -261,41 +261,43 @@ nav.navbar {
   max-width: 1600px;
   height: 100%;
   margin: 0 auto;
-  padding: 0 clamp(1.5rem, 4vw, 3rem);
+  padding: 0 clamp(1rem, 3vw, 3rem);
+  overflow-x: hidden;
 }
 
 /* --- Left Section (Logos) --- */
 .nav-left {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: clamp(0.5rem, 2vw, 1rem);
 }
 
 .navbar-logo-img {
   display: block;
-  height: 32px;
+  height: clamp(24px, 5vw, 32px);
   width: auto;
 }
 
 .flagship-logo {
-  height: 36px;
+  height: clamp(28px, 6vw, 36px);
 }
 
 /* --- Center Section (Desktop Nav Links) --- */
 .nav-center {
   display: flex;
   align-items: center;
-  gap: 2.5rem;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .nav-link {
   color: #a0aec0;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: clamp(0.8rem, 1.2vw, 0.9rem);
   font-weight: 500;
   letter-spacing: 0.05em;
   position: relative;
   transition: color 300ms ease;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -322,21 +324,23 @@ nav.navbar {
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: clamp(0.5rem, 2vw, 1rem);
 }
 
 .cta-btn {
   display: inline-flex;
   align-items: center;
-  padding: 0.5rem 1.2rem;
+  padding: clamp(0.4rem, 1vw, 0.5rem) clamp(0.8rem, 2vw, 1.2rem);
   border: 1px solid #1d4ed8;
   background-color: #1d4ed8; /* Darker blue for better contrast (blue-700) */
   color: #fff;
   border-radius: 999px;
   font-weight: 600;
+  font-size: clamp(0.8rem, 1.2vw, 0.9rem);
   text-decoration: none;
   transition: all 0.2s;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .cta-btn:hover {
@@ -356,5 +360,54 @@ nav.navbar {
 @media (max-width: 1024px) {
   .nav-center {
     display: none;
+  }
+  
+  .nav-shell {
+    height: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-left {
+    gap: 0.5rem;
+  }
+  
+  .navbar-logo-img {
+    height: 24px;
+  }
+  
+  .flagship-logo {
+    height: 28px;
+  }
+  
+  .nav-shell {
+    height: 56px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-bar {
+    padding: 0 0.75rem;
+  }
+  
+  .nav-left {
+    gap: 0.4rem;
+  }
+  
+  .navbar-logo-img {
+    height: 22px;
+  }
+  
+  .flagship-logo {
+    height: 26px;
+  }
+  
+  .cta-btn {
+    padding: 0.35rem 0.7rem;
+    font-size: 0.75rem;
+  }
+  
+  .nav-shell {
+    height: 52px;
   }
 }

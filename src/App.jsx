@@ -79,7 +79,7 @@ export default function App() {
 
           <section id="gallery">
             <div className="gallery-container">
-              <GallerySection bend={3} textColor="#ffffff" borderRadius={0.05} scrollEase={0.02} />
+              <GallerySection autoplay={true} pauseOnHover={true} />
             </div>
           </section>
 

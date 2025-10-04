@@ -1,15 +1,16 @@
 .about-shell {
   /* Reduced vertical padding from a max of 6rem to 4rem */
-  padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+  padding: clamp(2.5rem, 6vw, 4rem) clamp(1rem, 3vw, 3rem);
   color: #e8ecf1;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .about-content {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2.5rem;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
   align-items: center;
 }
 
@@ -17,25 +18,41 @@
 @media (min-width: 768px) {
   .about-content {
     grid-template-columns: 2fr 1fr; /* Text takes more space */
-    gap: 4rem;
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .about-content {
+    gap: 1.5rem;
   }
 }
 
 .about-text {
   text-align: left;
+  width: 100%;
 }
 
 .about-title {
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: clamp(1.75rem, 5vw, 3.5rem);
   font-weight: 600;
-  margin-bottom: 1.5rem;
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+  line-height: 1.2;
 }
 
 .about-text p {
-  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
   line-height: 1.7;
   opacity: 0.8;
   margin-bottom: 2rem;
+  max-width: 100%;
+}
+
+@media (max-width: 480px) {
+  .about-text p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
 }
 
 .register-button {
@@ -71,9 +88,21 @@
 }
 
 .about-logo {
-  max-width: 200px;
+  max-width: clamp(150px, 30vw, 200px);
   width: 100%;
   height: auto;
   /* Add the shadow effect */
   filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.5));
+}
+
+@media (max-width: 768px) {
+  .about-logo {
+    max-width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-logo {
+    max-width: 150px;
+  }
 }

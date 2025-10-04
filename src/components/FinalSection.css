@@ -1,19 +1,21 @@
 /* FinalSection.css */
 .final-section-shell {
-  padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 4vw, 3rem);
-  max-width: 1200px;
+  padding: clamp(2.5rem, 8vw, 6rem) clamp(1rem, 3vw, 3rem);
+  max-width: 1400px;
   margin: 0 auto;
   text-align: center;
   position: relative;
   z-index: 10;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .final-section-heading {
-  margin-bottom: 3rem;
+  margin-bottom: clamp(2rem, 5vw, 3rem);
 }
 
 .final-section-subtitle {
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  font-size: clamp(0.85rem, 1.5vw, 1.2rem);
   font-weight: 500;
   color: #a0aec0; /* Tailwind's gray-400 */
   letter-spacing: 0.05em;
@@ -22,19 +24,21 @@
 }
 
 .final-section-title {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2rem, 6vw, 4.5rem);
   font-weight: 700;
   letter-spacing: -0.02em;
   color: #fff;
   margin: 0;
+  line-height: 1.2;
 }
 
 .registration-form {
-  max-width: 600px;
+  max-width: min(600px, 100%);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  padding: 0 clamp(0.5rem, 2vw, 0);
 }
 
 .form-group {
@@ -43,7 +47,7 @@
 
 .form-label {
   display: block;
-  font-size: 0.9rem;
+  font-size: clamp(0.8rem, 1.2vw, 0.9rem);
   font-weight: 500;
   color: rgba(255, 255, 255, 0.7);
   margin-bottom: 0.5rem;
@@ -52,13 +56,14 @@
 
 .form-input {
   width: 100%;
-  padding: 0.8rem 1rem;
-  font-size: 1rem;
+  padding: clamp(0.6rem, 1.5vw, 0.8rem) clamp(0.8rem, 2vw, 1rem);
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
   color: #fff;
   background-color: rgba(10, 25, 47, 0.8); /* Dark blue, slightly transparent */
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
 }
 
 .form-input::placeholder {
@@ -72,18 +77,51 @@
 }
 
 .submit-button {
-  padding: 1rem 1.5rem;
-  font-size: 1.1rem;
+  padding: clamp(0.8rem, 2vw, 1rem) clamp(1.2rem, 3vw, 1.5rem);
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
   font-weight: 600;
   color: #fff;
   background-color: #1d4ed8; /* Darker blue for better contrast (blue-700) */
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: clamp(0.5rem, 2vw, 1rem);
+  width: 100%;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .submit-button:hover {
   background-color: #1e40af; /* Even darker on hover (blue-800) */
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .final-section-shell {
+    padding: 2rem 1rem;
+  }
+  
+  .registration-form {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .final-section-shell {
+    padding: 1.5rem 0.75rem;
+  }
+  
+  .final-section-title {
+    font-size: 1.75rem;
+  }
+  
+  .final-section-subtitle {
+    font-size: 0.75rem;
+  }
+  
+  .submit-button {
+    max-width: 100%;
+  }
 }
