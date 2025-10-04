@@ -78,9 +78,7 @@ export default function App() {
           </section>
 
           <section id="gallery">
-            <div className="gallery-container">
-              <GallerySection autoplay={true} pauseOnHover={true} />
-            </div>
+            <GallerySection />
           </section>
 
           <section id="register">

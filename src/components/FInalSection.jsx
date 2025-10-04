@@ -4,7 +4,7 @@ import './FinalSection.css';
 export default function FinalSection() {
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Handle form submission logic here
+   
     alert('Thank you for registering!');
   };
 
