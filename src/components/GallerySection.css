@@ -84,6 +84,8 @@
 .gallery-header {
   text-align: center;
   margin-bottom: 2.5rem;
+  margin-top: clamp(3rem, 6vh, 5rem);
+  padding-top: clamp(2rem, 4vh, 3rem);
   animation: fadeInUp 0.8s ease-out;
 }
 
@@ -419,6 +421,8 @@
 
   .gallery-header {
     margin-bottom: 2rem;
+    margin-top: 4rem;
+    padding-top: 2rem;
     padding: 0 1rem;
   }
 
@@ -525,6 +529,8 @@
 
   .gallery-header {
     padding: 0 0.75rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
   }
 
   .gallery-container {

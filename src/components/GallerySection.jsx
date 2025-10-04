@@ -80,7 +80,6 @@ export default function GallerySection() {
 
       <div className="gallery-content">
         <div className="gallery-header">
-          <div className="gallery-tag">✨ MEMORIES</div>
           <h2 className="gallery-title">Glimpses of Last Year</h2>
           <p className="gallery-subtitle">
             Relive the most memorable moments from our flagship event

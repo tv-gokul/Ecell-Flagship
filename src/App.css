@@ -192,9 +192,9 @@ body, .app-root, main {
   position: relative;
   overflow: hidden;
   border-top: 1px solid rgba(255, 255, 255, 0.07);
-  margin-top: clamp(2rem, 4vh, 3rem);
-  margin-bottom: clamp(4rem, 8vh, 6rem);
-  padding-bottom: clamp(3rem, 6vh, 5rem) !important;
+  margin-top: clamp(4rem, 8vh, 6rem);
+  margin-bottom: clamp(5rem, 10vh, 8rem);
+  padding-bottom: clamp(4rem, 8vh, 6rem) !important;
 }
 
 #gallery .section-inner {
@@ -207,30 +207,30 @@ body, .app-root, main {
 /* Speakers section - Add spacing for mobile */
 #speakers {
   margin-bottom: 0;
-  padding-bottom: clamp(3rem, 6vh, 5rem) !important;
+  padding-bottom: clamp(5rem, 10vh, 8rem) !important;
 }
 
 @media (max-width: 768px) {
   #speakers {
-    padding-bottom: 4rem !important;
+    padding-bottom: 5rem !important;
   }
   
   #gallery {
-    margin-top: 3rem;
-    margin-bottom: 4rem;
-    padding-bottom: 3rem !important;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    padding-bottom: 4rem !important;
   }
 }
 
 @media (max-width: 480px) {
   #speakers {
-    padding-bottom: 3rem !important;
+    padding-bottom: 4rem !important;
   }
   
   #gallery {
-    margin-top: 2.5rem;
-    margin-bottom: 3.5rem;
-    padding-bottom: 2.5rem !important;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    padding-bottom: 3rem !important;
   }
 }
 
@@ -239,8 +239,8 @@ body, .app-root, main {
   position: relative;
   background: linear-gradient(180deg, rgba(10, 14, 26, 0.5) 0%, rgba(0, 0, 0, 0.8) 100%);
   border-top: 2px solid rgba(168, 180, 255, 0.2);
-  margin-top: clamp(3rem, 6vh, 5rem);
-  padding: clamp(4rem, 10vh, 7rem) 0 !important;
+  margin-top: clamp(4rem, 8vh, 6rem);
+  padding: clamp(5rem, 12vh, 8rem) 0 !important;
 }
 
 #register::before {
